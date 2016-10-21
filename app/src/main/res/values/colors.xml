@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorPrimary">#4db6ac</color>
+    <color name="colorPrimaryDark">#009688</color>
+    <color name="colorAccent">#009688</color>
+
+    <color name="accent">#cccccc</color>
+    <color name="primary_text">#fff</color>
+    <color name="secondary_text">#fff</color>
+    <color name="tab_text_color">#fff</color>
+    <color name="tab_text_color_selected">#7CCD7C</color>
+    <color name="tab_indicator">#7CCD7C</color>
+    <color name="text_color_white">#ffffff</color>
+    <color name="text_color_black">#000000</color>
+    <color name="text_color_grey_light">#bebebe</color>
+    <color name="text_color_grey_light2">#e0e0da</color>
+    <color name="text_color_grey_dark">#858585</color>
+    <color name="text_color_blue">#311b92</color>
+    <color name="pressed_color">#bebebe</color>
+    <color name="default_color">#eeeeee</color>
+    <color name="text_color_orange">#f57f17</color>
+    <color name="text_color_red">#d70d17</color>
+    <color name="text_color_yellow">#ffc107</color>
+    <color name="progress_dialog_background">#f0455a64</color>
+    <color name="color_divider">#c4c4c4</color>
+    <color name="mb_green">#ff99cc00</color>
+    <color name="mb_green_dark">#ff6d9b00</color>
+    <color name="mb_red">#ffff4444</color>
+
+    <color name="fab_1">#199494</color>
+    <color name="fab_1_pressed">#137474</color>
+    <color name="fab_2">#607d8a</color>
+    <color name="fab_2_pressed">#506873</color>
+    <color name="fab_3">#4bad4e</color>
+    <color name="fab_3_pressed">#327434</color>
+    <color name="fab_4">#653ab5</color>
+    <color name="fab_4_pressed">#472980</color>
+    <color name="fab_5">#2298f2</color>
+    <color name="fab_5_pressed">#1c7ac2</color>
+    <color name="fab_6">#785448</color>
+    <color name="fab_6_pressed">#583e35</color>
+    <color name="fab_7">#ff5724</color>
+    <color name="fab_7_pressed">#bc401a</color>
+
+    <color name="ripple_color">#44ffffff</color>
+
+
 </resources>
