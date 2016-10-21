@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class SetTypeFace {
 
     public static Typeface getTypeface (Context c) {
-        Typeface typeface = Typeface.createFromAsset (c.getAssets (), "Kozuka-Gothic.ttf");
+        Typeface typeface = Typeface.createFromAsset (c.getAssets (), "Montserrat-Regular.otf");
         return typeface;
     }
 

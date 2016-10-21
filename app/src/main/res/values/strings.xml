@@ -7,7 +7,7 @@
         complete sign up
     </string>
     <string name="resend">Resend</string>
-    <string name="send_sms_code">SEND SMS Code</string>
+    <string name="send_sms_code">SEND SMS CODE</string>
     <string name="submit">SUBMIT</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_in">Sign In</string>

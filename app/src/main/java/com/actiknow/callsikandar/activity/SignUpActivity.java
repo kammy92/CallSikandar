@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.actiknow.callsikandar.R;
+import com.actiknow.callsikandar.utils.Utils;
 
 public class SignUpActivity extends AppCompatActivity {
     EditText etPhoneNumber;
@@ -57,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void initData () {
-
+        Utils.setTypefaceToAllViews (this, tvSendSMSCode);
     }
 
     private void initListener () {

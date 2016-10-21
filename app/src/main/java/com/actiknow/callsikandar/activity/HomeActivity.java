@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actiknow.callsikandar.R;
+import com.actiknow.callsikandar.utils.Utils;
 
 /**
  * Created by l on 19/10/2016.
@@ -35,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initData () {
+        Utils.setTypefaceToAllViews (this, tvCreateAccount);
         final Handler handler = new Handler ();
         handler.postDelayed (new Runnable () {
             @Override
