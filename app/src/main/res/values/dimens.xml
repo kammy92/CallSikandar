@@ -12,8 +12,14 @@
     <dimen name="text_size_extra_large">20sp</dimen>
 
 
-<!--
-    <dimen name="material_drawer_item_primary_text">22sp</dimen>
--->
+    <dimen name="button_elevation">2dp</dimen>
+
+
+    <!--
+        <dimen name="material_drawer_item_primary_text">22sp</dimen>
+    -->
+
+    <dimen name="material_drawer_account_header_text">26sp</dimen>
+
 
 </resources>

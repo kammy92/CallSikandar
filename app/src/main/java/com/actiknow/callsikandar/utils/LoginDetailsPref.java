@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class LoginDetailsPref {
-    public static String AUDITOR_NAME = "auditor_name";
-    public static String USERNAME = "username";
-    public static String AUDITOR_ID = "auditor_id";
-    public static String AUDITOR_AGENCY_ID = "auditor_agency_id";
+    public static String USER_NAME = "user_name";
+    public static String USER_EMAIL = "user_email";
+    public static String USER_ID = "user_id";
+    public static String USER_MOBILE = "user_mobile";
     private static LoginDetailsPref loginDetailsPref;
     private String LOGIN_DETAILS = "LOGIN_DETAILS";
 

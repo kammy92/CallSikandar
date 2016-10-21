@@ -8,6 +8,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.actiknow.callsikandar.R;
+import com.actiknow.callsikandar.utils.Constants;
+import com.actiknow.callsikandar.utils.LoginDetailsPref;
 
 /**
  * Created by l on 19/10/2016.
@@ -45,4 +47,13 @@ public class LoginActivity  extends AppCompatActivity {
 
     private void initListener() {
     }
+
+    private void setPreferences () {
+        LoginDetailsPref loginDetailsPref = LoginDetailsPref.getInstance ();
+        loginDetailsPref.putStringPref (LoginActivity.this, LoginDetailsPref.USER_NAME, Constants.user_name);
+        loginDetailsPref.putStringPref (LoginActivity.this, LoginDetailsPref.USER_EMAIL, Constants.user_email);
+        loginDetailsPref.putStringPref (LoginActivity.this, LoginDetailsPref.USER_MOBILE, Constants.user_mobile);
+        loginDetailsPref.putIntPref (LoginActivity.this, LoginDetailsPref.USER_ID, Constants.user_id_main);
+    }
+
 }

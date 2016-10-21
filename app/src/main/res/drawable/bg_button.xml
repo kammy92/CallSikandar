@@ -1,37 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true">
-        <shape>
-            <solid
-                android:color="@color/colorPrimary"/>
-            <stroke
-                android:width="0dp"
-                android:color="#222222"/>
-            <corners
-                android:radius="5dp"/>
-            <padding
-                android:left="10dp"
-                android:top="10dp"
-                android:right="10dp"
-                android:bottom="10dp"/>
-        </shape>
-    </item>
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:color="@color/primary_dark"
+        tools:targetApi="lollipop">
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:state_pressed="true">
+            <shape>
+                <solid
+                    android:color="@color/colorPrimaryDark"/>
+                <stroke
+                    android:width="0dp"
+                    android:color="#222222"/>
+                <corners
+                    android:radius="5dp"/>
+                <padding
+                    android:bottom="10dp"
+                    android:left="10dp"
+                    android:right="10dp"
+                    android:top="10dp"/>
+            </shape>
+        </item>
+    </selector>
     <item>
         <shape>
             <gradient
-                android:startColor="@color/colorPrimary"
+                android:angle="360"
                 android:endColor="@color/colorPrimary"
-                android:angle="270"/>
+                android:startColor="@color/colorPrimary"/>
             <stroke
                 android:width="0dp"
                 android:color="#4aa5d4"/>
             <corners
                 android:radius="5dp"/>
             <padding
+                android:bottom="10dp"
                 android:left="10dp"
-                android:top="10dp"
                 android:right="10dp"
-                android:bottom="10dp"/>
+                android:top="10dp"/>
         </shape>
     </item>
-</selector>
+
+</ripple>

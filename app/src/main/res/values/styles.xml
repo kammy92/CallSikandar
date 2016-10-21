@@ -19,8 +19,8 @@
 
     <style name="ThemeOverlay.MyApp.ActionBar" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:textColorHint">@color/text_color_grey_light</item>
-        <item name="android:textColorPrimary">@color/text_color_grey_dark</item>
-        <item name="actionMenuTextColor">@color/text_color_grey_dark</item>
+        <item name="android:textColorPrimary">@color/text_color_white</item>
+        <item name="actionMenuTextColor">@color/text_color_white</item>
     </style>
 
     <style name="full_screen" parent="AppTheme">

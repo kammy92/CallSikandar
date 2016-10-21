@@ -57,15 +57,6 @@
 
             </android.support.design.widget.CoordinatorLayout>
         </android.support.design.widget.AppBarLayout>
-        <RelativeLayout
-            android:id="@+id/rlHeader"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/appBar"
-            android:animateLayoutChanges="true">
-
-        </RelativeLayout>
-
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"

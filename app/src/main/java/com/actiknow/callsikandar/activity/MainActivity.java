@@ -2,6 +2,7 @@ package com.actiknow.callsikandar.activity;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.actiknow.callsikandar.R;
+import com.actiknow.callsikandar.utils.Constants;
+import com.actiknow.callsikandar.utils.LoginDetailsPref;
 import com.actiknow.callsikandar.utils.Utils;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.appindexing.Action;
@@ -50,8 +53,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
         this.savedInstanceState = savedInstanceState;
+        initPref ();
         initData ();
         initView ();
+        isLogin ();
         setUpNavigationDrawer ();
         initDrawer ();
 
@@ -66,6 +71,24 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder (this).addApi (AppIndex.API).build ();
 
     }
+
+    private void initPref () {
+        LoginDetailsPref loginDetailsPref = LoginDetailsPref.getInstance ();
+        Constants.user_name = loginDetailsPref.getStringPref (MainActivity.this, LoginDetailsPref.USER_NAME);
+        Constants.user_email = loginDetailsPref.getStringPref (MainActivity.this, LoginDetailsPref.USER_EMAIL);
+        Constants.user_mobile = loginDetailsPref.getStringPref (MainActivity.this, LoginDetailsPref.USER_MOBILE);
+        Constants.user_id_main = loginDetailsPref.getIntPref (MainActivity.this, LoginDetailsPref.USER_ID);
+    }
+
+    private void isLogin () {
+        if (Constants.user_name.equalsIgnoreCase ("") || Constants.user_email.equalsIgnoreCase ("") || Constants.user_mobile.equalsIgnoreCase ("") || Constants.user_id_main == 0) {
+            Intent myIntent = new Intent (this, HomeActivity.class);
+            startActivity (myIntent);
+        }
+        if (Constants.user_id_main == 0)
+            finish ();
+    }
+
 
     private void initDrawer () {
         DrawerImageLoader.init (new AbstractDrawerImageLoader () {
@@ -123,11 +146,12 @@ public class MainActivity extends AppCompatActivity {
                 .addDrawerItems (
                         new PrimaryDrawerItem ().withName (R.string.drawer_item_appointments).withIcon (FontAwesome.Icon.faw_calendar).withIdentifier (1),
                         new PrimaryDrawerItem ().withName (R.string.drawer_item_history).withIcon (FontAwesome.Icon.faw_history).withIdentifier (2),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_service_providers).withIcon (FontAwesome.Icon.faw_home).withIdentifier (3),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_rate_callsikandar).withIcon (FontAwesome.Icon.faw_home).withIdentifier (4),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_settings).withIcon (FontAwesome.Icon.faw_home).withIdentifier (5),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_support).withIcon (FontAwesome.Icon.faw_home).withIdentifier (6),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_log_out).withIcon (FontAwesome.Icon.faw_home).withIdentifier (7)
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_service_providers).withIcon (FontAwesome.Icon.faw_map_marker).withIdentifier (3),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_rate_callsikandar).withIcon (FontAwesome.Icon.faw_star).withIdentifier (4),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_manage_vehicles).withIcon (FontAwesome.Icon.faw_car).withIdentifier (5),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_settings).withIcon (FontAwesome.Icon.faw_cog).withIdentifier (6),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_support).withIcon (FontAwesome.Icon.faw_question_circle).withIdentifier (7),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_log_out).withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (8)
 //                        new DividerDrawerItem (),
 //                        new SecondaryDrawerItem ().withName (R.string.drawer_item_settings).withEnabled (false).withSelectable (false).withIdentifier (2),
 //                        new SecondaryDrawerItem ().withName (R.string.drawer_item_help_and_feedback).withEnabled (false).withSelectable (false).withIdentifier (3),
