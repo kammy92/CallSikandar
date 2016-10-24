@@ -50,7 +50,9 @@ public class HomeActivity extends AppCompatActivity {
         tvLogIn.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View v) {
-
+                Intent intent = new Intent (HomeActivity.this, LoginActivity.class);
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         tvCreateAccount.setOnClickListener (new View.OnClickListener () {
@@ -61,5 +63,6 @@ public class HomeActivity extends AppCompatActivity {
                 overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+
     }
 }

@@ -1,6 +1,9 @@
 package com.actiknow.callsikandar.utils;
 
 public class Constants {
+
+    public static String font_name = "Montserrat-Regular.otf";
+
     public static String user_name = "";
     public static String user_email = "";
     public static String user_mobile = "";
@@ -20,4 +23,10 @@ public class Constants {
 
     public static int image_quality = 10; // 10
     public static int max_image_size = 320; // 320
+
+
+    public static String api_key = "9bfddb8a745486896cd9b8625b2d841a";
+    public static String user_login_key = "";
+
+
 }

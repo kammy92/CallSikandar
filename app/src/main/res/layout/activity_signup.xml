@@ -1,8 +1,8 @@
 <android.support.design.widget.CoordinatorLayout
     android:id="@+id/clMain"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
@@ -13,8 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true">
-
-
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBar"
             android:layout_width="match_parent"
@@ -62,22 +60,23 @@
         </android.support.design.widget.AppBarLayout>
 
         <RelativeLayout
+            android:id="@+id/rlOTP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/appBar">
-
+            android:layout_above="@+id/rlButton"
+            android:layout_below="@+id/appBar"
+            android:animateLayoutChanges="true"
+            android:visibility="visible">
             <TextView
+                android:id="@+id/textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_margin"
                 android:layout_marginRight="@dimen/activity_margin"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/activity_margin"
                 android:gravity="center"
-                android:id="@+id/textview"
                 android:text="@string/text_enter_your_phone_number"
                 android:textSize="@dimen/text_size_medium"/>
-
-
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_mobile"
                 android:layout_width="match_parent"
@@ -87,16 +86,15 @@
                 android:layout_below="@+id/textview"
                 android:layout_margin="@dimen/activity_margin">
                 <EditText
-                    android:id="@+id/etMobileNumber"
+                    android:id="@+id/etMobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Mobile Number"
                     android:inputType="phone"
+                    android:maxLength="10"
                     android:padding="@dimen/edittext_padding"
                     android:textSize="@dimen/text_size_medium"/>
             </android.support.design.widget.TextInputLayout>
-
-
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_otp"
                 android:layout_width="match_parent"
@@ -104,7 +102,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/tvResend"
-                android:layout_margin="@dimen/activity_margin">
+                android:layout_margin="@dimen/activity_margin"
+                android:visibility="gone">
                 <EditText
                     android:id="@+id/etOTP"
                     android:layout_width="match_parent"
@@ -112,38 +111,121 @@
                     android:hint="OTP"
                     android:inputType="phone"
                     android:padding="@dimen/edittext_padding"
-                    android:textSize="@dimen/text_size_medium"/>
+                    android:textSize="@dimen/text_size_medium"
+                    android:visibility="visible"/>
             </android.support.design.widget.TextInputLayout>
             <TextView
                 android:id="@+id/tvResend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:layout_below="@+id/input_layout_mobile"
+                android:layout_centerHorizontal="true"
                 android:gravity="center"
+                android:padding="10dp"
                 android:text="@string/resend"
                 android:textColor="@color/text_color_red"
                 android:textSize="@dimen/text_size_medium"
-                android:visibility="visible"
-                android:layout_below="@+id/input_layout_mobile"
-                android:layout_centerHorizontal="true"/>
-
-
+                android:visibility="gone"/>
         </RelativeLayout>
 
-
+        <RelativeLayout
+            android:id="@+id/rlProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/rlButton"
+            android:layout_below="@+id/rlOTP"
+            android:animateLayoutChanges="true"
+            android:visibility="gone">
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/activity_margin">
+                <EditText
+                    android:id="@+id/etUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Name"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/edittext_padding"
+                    android:textSize="@dimen/text_size_medium"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/input_layout_username"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/activity_margin">
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:padding="@dimen/edittext_padding"
+                    android:textSize="@dimen/text_size_medium"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/input_layout_email"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/activity_margin">
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="@dimen/edittext_padding"
+                    android:textSize="@dimen/text_size_medium"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/input_layout_password"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/activity_margin">
+                <EditText
+                    android:id="@+id/etConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:padding="@dimen/edittext_padding"
+                    android:textSize="@dimen/text_size_medium"/>
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rlButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/llAlreadyAccount"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="@dimen/activity_margin"
+            android:animateLayoutChanges="true">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
                 android:orientation="vertical">
-
                 <TextView
                     android:id="@+id/tvSendSMSCode"
                     android:layout_width="match_parent"
@@ -151,13 +233,29 @@
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/bg_button"
-                    android:text="@string/send_sms_code"
+                    android:elevation="@dimen/button_elevation"
                     android:gravity="center"
                     android:padding="@dimen/activity_margin"
+                    android:text="@string/send_sms_code"
                     android:textColor="@color/text_color_white"
                     android:textSize="@dimen/text_size_extra_large"
+                    android:textStyle="bold"
                     android:visibility="visible"/>
-
+                <TextView
+                    android:id="@+id/tvVerify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:background="@drawable/bg_button"
+                    android:elevation="@dimen/button_elevation"
+                    android:gravity="center"
+                    android:padding="@dimen/activity_margin"
+                    android:text="@string/verify"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="@dimen/text_size_extra_large"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
                 <TextView
                     android:id="@+id/tvSubmit"
                     android:layout_width="match_parent"
@@ -165,43 +263,34 @@
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/bg_button"
-                    android:text="@string/submit"
+                    android:elevation="@dimen/button_elevation"
                     android:gravity="center"
                     android:padding="@dimen/activity_margin"
+                    android:text="@string/submit"
                     android:textColor="@color/text_color_white"
                     android:textSize="@dimen/text_size_extra_large"
+                    android:textStyle="bold"
                     android:visibility="gone"/>
-
+                <LinearLayout
+                    android:id="@+id/llAlreadyAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/edittext_padding">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/already_have_an_account"
+                        android:textSize="@dimen/text_size_medium"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:text="@string/sign_in"
+                        android:textColor="@color/primary"
+                        android:textSize="@dimen/text_size_medium"/>
+                </LinearLayout>
             </LinearLayout>
-
-
         </RelativeLayout>
-
-
-        <LinearLayout
-            android:id="@+id/llAlreadyAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/already_have_an_account"
-                android:textSize="@dimen/text_size_medium"/>
-
-            <TextView
-                android:layout_marginLeft="@dimen/activity_margin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sign_in"
-                android:textColor="@color/text_color_red"
-                android:textSize="@dimen/text_size_medium"/>
-        </LinearLayout>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -8,13 +8,15 @@
     </string>
     <string name="resend">Resend</string>
     <string name="send_sms_code">SEND SMS CODE</string>
+    <string name="verify">VERIFY</string>
     <string name="submit">SUBMIT</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_in">Sign In</string>
     <string name="forgotten_your_password">Forgotten your password</string>
-    <string name="reset">Reset ?</string>
-    <string name="log_In">Log In</string>
-    <string name="need_an_account">Need an account? Sign up</string>
+    <string name="reset">Reset?</string>
+    <string name="log_In">LOG IN</string>
+    <string name="need_an_account">Need an account?</string>
+    <string name="sign_up">Sign up</string>
 
     <string name="dialog_basic_positive">Ok</string>
     <string name="dialog_validation_title">Validation Error</string>
@@ -30,8 +32,14 @@
     <string name="drawer_item_log_out">Log out</string>
     <string name="drawer_item_collapsing_toolbar_drawer">CollapsingToolbar Drawer</string>
 
+    <string name="dialog_logout_title">LOGOUT</string>
+    <string name="dialog_logout_content">Are you sure you want to LOGOUT</string>
+    <string name="dialog_logout_positive">Yes</string>
+    <string name="dialog_logout_negative">No</string>
+
 
     <string name="activity_title_sign_up">Sign Up</string>
+    <string name="activity_title_log_in">Log In</string>
 
 
 </resources>

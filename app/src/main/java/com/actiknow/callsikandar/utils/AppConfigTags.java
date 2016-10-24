@@ -10,6 +10,7 @@ public class AppConfigTags {
     public static final String SERVER_RESPONSE = "SERVER RESPONSE";
     public static final String DIDNT_RECEIVE_ANY_DATA_FROM_SERVER = "DIDNT RECEIVE ANY DATA FROM SERVER";
     public static final String PARAMETERS_SENT_TO_THE_SERVER = "PARAMETERS SENT TO THE SERVER";
+    public static final String HEADERS_SENT_TO_THE_SERVER = "HEADERS SENT TO THE SERVER";
 
     public static final String ATM_ID = "atm_id";
     public static final String ATM_UNIQUE_ID = "atm_unique_id";
@@ -47,10 +48,12 @@ public class AppConfigTags {
     public static final String AUDITOR_AGENCY_ID = "auditor_agency_id";
     public static final String AUDITOR_EMAIL = "auditor_email";
 
+
     public static final String TAG = "TAG";
     public static final String VOLLEY_ERROR = "VOLLEY ERROR";
+    public static final String ERROR = "error";
+    public static final String MESSAGE = "message";
     public static final String DATABASE_LOG = "DATABASE LOG";
 
-    public static final String PAGE_NUMBER = "PAGE_NUMBER";
 
 }

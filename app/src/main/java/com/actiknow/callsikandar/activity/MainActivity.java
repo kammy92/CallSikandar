@@ -6,21 +6,29 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.actiknow.callsikandar.R;
 import com.actiknow.callsikandar.utils.Constants;
 import com.actiknow.callsikandar.utils.LoginDetailsPref;
+import com.actiknow.callsikandar.utils.SetTypeFace;
+import com.actiknow.callsikandar.utils.TypefaceSpan;
 import com.actiknow.callsikandar.utils.Utils;
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -89,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
             finish ();
     }
 
-
     private void initDrawer () {
         DrawerImageLoader.init (new AbstractDrawerImageLoader () {
             @Override
@@ -144,14 +151,14 @@ public class MainActivity extends AppCompatActivity {
                 .withToolbar (toolbar)
 //                .withItemAnimator (new AlphaCrossFadeAnimator ())
                 .addDrawerItems (
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_appointments).withIcon (FontAwesome.Icon.faw_calendar).withIdentifier (1),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_history).withIcon (FontAwesome.Icon.faw_history).withIdentifier (2),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_service_providers).withIcon (FontAwesome.Icon.faw_map_marker).withIdentifier (3),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_rate_callsikandar).withIcon (FontAwesome.Icon.faw_star).withIdentifier (4),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_manage_vehicles).withIcon (FontAwesome.Icon.faw_car).withIdentifier (5),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_settings).withIcon (FontAwesome.Icon.faw_cog).withIdentifier (6),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_support).withIcon (FontAwesome.Icon.faw_question_circle).withIdentifier (7),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_log_out).withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (8)
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_appointments).withIcon (FontAwesome.Icon.faw_calendar).withIdentifier (1).withSetSelected (true),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_history).withIcon (FontAwesome.Icon.faw_history).withIdentifier (2).withSelectable (false).withSetSelected (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_service_providers).withIcon (FontAwesome.Icon.faw_map_marker).withIdentifier (3).withSelectable (false).withSetSelected (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_rate_callsikandar).withIcon (FontAwesome.Icon.faw_star).withIdentifier (4).withSelectable (false).withSetSelected (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_manage_vehicles).withIcon (FontAwesome.Icon.faw_car).withIdentifier (5).withSetSelected (false).withSelectable (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_settings).withIcon (FontAwesome.Icon.faw_cog).withIdentifier (6).withSetSelected (false).withSelectable (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_support).withIcon (FontAwesome.Icon.faw_question_circle).withIdentifier (7).withSelectable (false).withSetSelected (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_log_out).withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (8).withSelectable (false).withSetSelected (false)
 //                        new DividerDrawerItem (),
 //                        new SecondaryDrawerItem ().withName (R.string.drawer_item_settings).withEnabled (false).withSelectable (false).withIdentifier (2),
 //                        new SecondaryDrawerItem ().withName (R.string.drawer_item_help_and_feedback).withEnabled (false).withSelectable (false).withIdentifier (3),
@@ -164,7 +171,18 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onItemClick (View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
                         switch ((int) drawerItem.getIdentifier ()) {
-                            case 5:
+                            case 4:
+//                                final String appPackageName = getPackageName (); // getPackageName() from Context or Activity object
+                                final String appPackageName = "com.actiknow.callsikandar";
+                                try {
+                                    startActivity (new Intent (Intent.ACTION_VIEW, Uri.parse ("market://details?id=" + appPackageName)));
+                                } catch (android.content.ActivityNotFoundException anfe) {
+                                    startActivity (new Intent (Intent.ACTION_VIEW, Uri.parse ("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                                }
+
+                                break;
+                            case 8:
+                                showLogOutDialog ();
                                 Utils.showLog (Log.ERROR, "position ", "" + position, true);
                                 break;
                         }
@@ -177,6 +195,67 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void showLogOutDialog () {
+        TextView tvMessage;
+        MaterialDialog dialog = new MaterialDialog.Builder (this)
+                .iconRes (R.mipmap.ic_launcher)
+                .limitIconToDefaultSize ()
+                .title (R.string.dialog_logout_title)
+                .content (R.string.dialog_logout_content)
+                .positiveText (R.string.dialog_logout_positive)
+                .negativeText (R.string.dialog_logout_negative)
+                .typeface (SetTypeFace.getTypeface (MainActivity.this), SetTypeFace.getTypeface (MainActivity.this))
+                .onPositive (new MaterialDialog.SingleButtonCallback () {
+                    @Override
+                    public void onClick (@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss ();
+                        LoginDetailsPref loginDetailsPref = LoginDetailsPref.getInstance ();
+                        loginDetailsPref.putIntPref (MainActivity.this, LoginDetailsPref.USER_ID, 0);
+                        loginDetailsPref.putStringPref (MainActivity.this, LoginDetailsPref.USER_NAME, "");
+                        loginDetailsPref.putStringPref (MainActivity.this, LoginDetailsPref.USER_EMAIL, "");
+                        loginDetailsPref.putStringPref (MainActivity.this, LoginDetailsPref.USER_MOBILE, "");
+                        Intent intent = new Intent (MainActivity.this, HomeActivity.class);
+                        Constants.user_email = "";
+                        Constants.user_name = "";
+                        Constants.user_mobile = "";
+                        Constants.user_id_main = 0;
+                        intent.setFlags (Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity (intent);
+                        overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
+                    }
+                }).build ();
+        dialog.show ();
+
+        /*
+        AlertDialog.Builder alert = new AlertDialog.Builder (MainActivity.this);
+        alert.setMessage ("Are you sure you want to LOGOUT");
+        alert.setPositiveButton ("YES", new DialogInterface.OnClickListener () {
+            @Override
+            public void onClick (DialogInterface dialog, int which) {
+                dialog.dismiss ();
+                LoginDetailsPref loginDetailsPref = LoginDetailsPref.getInstance ();
+                loginDetailsPref.putIntPref (MainActivity.this, LoginDetailsPref.AUDITOR_ID, 0);
+                loginDetailsPref.putStringPref (MainActivity.this, LoginDetailsPref.AUDITOR_NAME, "");
+                loginDetailsPref.putStringPref (MainActivity.this, LoginDetailsPref.USERNAME, "");
+                loginDetailsPref.putIntPref (MainActivity.this, LoginDetailsPref.AUDITOR_AGENCY_ID, 0);
+                Intent intent = new Intent (MainActivity.this, LoginActivity.class);
+                Constants.username = "";
+                Constants.auditor_name = "";
+                Constants.auditor_id_main = 0;
+                intent.setFlags (Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+        alert.setNegativeButton ("NO", new DialogInterface.OnClickListener () {
+            @Override
+            public void onClick (DialogInterface dialog, int which) {
+                dialog.dismiss ();
+            }
+        });
+        alert.show ();
+        */
+    }
 
     @Override
     protected void onSaveInstanceState (Bundle outState) {
@@ -230,13 +309,15 @@ public class MainActivity extends AppCompatActivity {
     private void setUpNavigationDrawer () {
         toolbar = (Toolbar) findViewById (R.id.toolbar1);
         toolbar.showOverflowMenu ();
+        SpannableString s = new SpannableString (getResources ().getString (R.string.app_name));
+        s.setSpan (new TypefaceSpan (MainActivity.this, Constants.font_name), 0, s.length (), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         setSupportActionBar (toolbar);
         ActionBar actionBar = getSupportActionBar ();
         try {
             assert actionBar != null;
             actionBar.setDisplayHomeAsUpEnabled (false);
             actionBar.setHomeButtonEnabled (false);
-            actionBar.setTitle (getResources ().getString (R.string.app_name));
+            actionBar.setTitle (s);
             actionBar.setDisplayShowTitleEnabled (false);
         } catch (Exception ignored) {
         }

@@ -1,120 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/clMain"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:animateLayoutChanges="true"
+    android:background="@color/app_background_grey"
+    tools:context="com.actiknow.callsikandar.activity.HomeActivity">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:animateLayoutChanges="true">
 
-        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/toolbarLogin"
-            style="@style/Widget.MyApp.ActionBar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/text_color_red"
-            android:elevation="0dp"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
+            android:animateLayoutChanges="true"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:visibility="visible"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar1"
+                style="@style/Widget.MyApp.ActionBar"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:background="@color/primary"
+                android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+                app:layout_collapseMode="parallax">
+                <RelativeLayout
+                    android:id="@+id/toolbar_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical">
+                    <!--
+                                        <ImageView
+                                            android:id="@+id/imageView"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/ic_navigation_menu"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_alignParentStart="true"/>
+                    -->
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+            <android.support.design.widget.CoordinatorLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                tools:context="com.actiknow.liveaudit.activity.MainActivity">
 
-        </android.support.v7.widget.Toolbar>
+            </android.support.design.widget.CoordinatorLayout>
+        </android.support.design.widget.AppBarLayout>
 
 
-        <EditText
-            android:id="@+id/etEmail"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/edit_text_background"
-            android:hint="Email/Number"
-            android:inputType="textEmailAddress"
-            android:padding="10dp" />
+            android:layout_height="match_parent"
+            android:layout_above="@+id/linearLayout"
+            android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+            android:layout_below="@+id/appBar">
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_text_background"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="10dp" />
 
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textview"
+                android:layout_margin="@dimen/activity_margin">
+                <EditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobile Number"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:padding="@dimen/edittext_padding"
+                    android:textSize="@dimen/text_size_medium"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/input_layout_mobile"
+                android:layout_margin="@dimen/activity_margin">
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="@dimen/edittext_padding"
+                    android:textSize="@dimen/text_size_medium"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llForgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_layout_password"
+                android:layout_marginBottom="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/edittext_padding"
+                    android:text="@string/forgotten_your_password"
+                    android:textSize="@dimen/text_size_medium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/edittext_padding"
+                    android:text="@string/reset"
+                    android:textColor="@color/text_color_red"
+                    android:textSize="@dimen/text_size_medium"/>
+            </LinearLayout>
+
+
+        </RelativeLayout>
         <LinearLayout
-            android:id="@+id/llForgotPassword"
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/forgotten_your_password"
-                android:textSize="15sp"
-                android:padding="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/reset"
-                android:textColor="@color/text_color_red"
-                android:textSize="15dp" />
-        </LinearLayout>
-        
-        
-
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="20dp">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/log_In"
-            android:id="@+id/btLogIn"
-            android:layout_gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:background="@drawable/bg_button"
-            android:textColor="@color/text_color_white"/>
+            android:layout_marginBottom="@dimen/activity_margin" android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvLogIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:background="@drawable/bg_button"
+                android:elevation="@dimen/button_elevation"
+                android:gravity="center"
+                android:padding="@dimen/activity_margin"
+                android:text="@string/log_In"
+                android:textColor="@color/text_color_white"
+                android:textSize="@dimen/text_size_extra_large"
+                android:textStyle="bold"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvSignup"
-            android:text="@string/need_an_account"
-            android:layout_below="@+id/btLogIn"
-            android:padding="10dp"
-            android:textSize="15sp"
-            android:gravity="center"
-            android:textColor="@color/text_color_black"
-            android:textStyle="bold"/>
+            <LinearLayout
+                android:id="@+id/llNeedAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/edittext_padding">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/need_an_account"
+                    android:textSize="@dimen/text_size_medium"/>
 
-</RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:text="@string/sign_up"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/text_size_medium"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

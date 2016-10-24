@@ -27,4 +27,9 @@ public class AppConfigURL {
     //    public static String URL_SUBMITREPORT = "http://hindustansupply.com/ct_audit_atms/index.php/auditor/createReports";
     public static String URL_SUBMITREPORT = "http://hindustansupply.com/ct_audit_atms/atmaudit.php";
     public static String URL_GETSERVERTIME = "http://hindustansupply.com/ct_audit_atms/index.php/auditor/getServerTime";
+
+
+    public static String URL_GETOTP = "https://callsikandar-api-cammy92.c9users.io/api/v1/user/otp";
+
+
 }
