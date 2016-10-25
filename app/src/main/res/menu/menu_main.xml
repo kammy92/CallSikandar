@@ -1,4 +1,5 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
 
@@ -7,7 +8,7 @@
     <item android:id="@+id/action_search"
           android:icon="@drawable/ic_search"
           android:orderInCategory="1"
-          android:title="Search"
+          android:title="Search Main"
           app:actionViewClass="android.support.v7.widget.SearchView"
           app:showAsAction="always"/>
 

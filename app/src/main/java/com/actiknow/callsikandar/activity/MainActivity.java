@@ -6,14 +6,16 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actiknow.callsikandar.R;
+import com.actiknow.callsikandar.fragment.AppointmentFragment;
+import com.actiknow.callsikandar.fragment.HistoryFragment;
+import com.actiknow.callsikandar.fragment.HomeFragment;
+import com.actiknow.callsikandar.fragment.ManageVehicleFragment;
+import com.actiknow.callsikandar.fragment.ServiceProviderFragment;
 import com.actiknow.callsikandar.utils.Constants;
 import com.actiknow.callsikandar.utils.LoginDetailsPref;
 import com.actiknow.callsikandar.utils.SetTypeFace;
@@ -30,6 +37,8 @@ import com.actiknow.callsikandar.utils.Utils;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -51,9 +60,18 @@ public class MainActivity extends AppCompatActivity {
     GoogleApiClient client;
 
     Bundle savedInstanceState;
+    Fragment fragment = null;
+    FloatingActionMenu fabHomeMenu;
+    FloatingActionButton fabRequestEstimate;
+    FloatingActionButton fabRegularService;
+    FloatingActionButton fabRepairs;
+    FloatingActionButton fabDentsAndPaint;
+    FloatingActionButton fabCarCleaning;
+    FloatingActionButton fabAccessories;
+    FloatingActionButton fabBreakdown;
+    FloatingActionButton fabAddVehicle;
     private AccountHeader headerResult;
     private Drawer result;
-
     private Toolbar toolbar;
 
     @Override
@@ -72,12 +90,27 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView () {
         toolbar = (Toolbar) findViewById (R.id.toolbar1);
+        fabHomeMenu = (FloatingActionMenu) findViewById (R.id.fabHomeMenu);
+        fabRequestEstimate = (FloatingActionButton) findViewById (R.id.fabRequestEstimate);
+        fabRegularService = (FloatingActionButton) findViewById (R.id.fabRegularService);
+        fabRepairs = (FloatingActionButton) findViewById (R.id.fabRepairs);
+        fabDentsAndPaint = (FloatingActionButton) findViewById (R.id.fabDentsAndPaint);
+        fabCarCleaning = (FloatingActionButton) findViewById (R.id.fabCarCleaning);
+        fabAccessories = (FloatingActionButton) findViewById (R.id.fabAccessories);
+        fabBreakdown = (FloatingActionButton) findViewById (R.id.fabBreakdown);
+
+        fabAddVehicle = (FloatingActionButton) findViewById (R.id.fabAddVehicle);
     }
 
     private void initData () {
         new DrawerBuilder ().withActivity (this).build ();
         client = new GoogleApiClient.Builder (this).addApi (AppIndex.API).build ();
 
+        fragment = new HomeFragment ();
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager ();
+            fragmentManager.beginTransaction ().replace (R.id.main_content, fragment).commit ();
+        }
     }
 
     private void initPref () {
@@ -136,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
 //                        .withEmail ("Volkswagen Polo"))
 //                        .withIcon ("http://i.istockimg.com/file_thumbview_approve/64330137/3/stock-photo-64330137-a-icon-of-a-businessman-avatar-or-profile-pic.jpg"))
 //                        .withIcon (R.drawable.ic_blank_profile_image))
-
                 .withProfileImagesVisible (false)
                 .withProfileImagesClickable (false)
                 .withPaddingBelowHeader (false)
@@ -151,14 +183,15 @@ public class MainActivity extends AppCompatActivity {
                 .withToolbar (toolbar)
 //                .withItemAnimator (new AlphaCrossFadeAnimator ())
                 .addDrawerItems (
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_appointments).withIcon (FontAwesome.Icon.faw_calendar).withIdentifier (1).withSetSelected (true),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_history).withIcon (FontAwesome.Icon.faw_history).withIdentifier (2).withSelectable (false).withSetSelected (false),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_service_providers).withIcon (FontAwesome.Icon.faw_map_marker).withIdentifier (3).withSelectable (false).withSetSelected (false),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_rate_callsikandar).withIcon (FontAwesome.Icon.faw_star).withIdentifier (4).withSelectable (false).withSetSelected (false),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_manage_vehicles).withIcon (FontAwesome.Icon.faw_car).withIdentifier (5).withSetSelected (false).withSelectable (false),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_settings).withIcon (FontAwesome.Icon.faw_cog).withIdentifier (6).withSetSelected (false).withSelectable (false),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_support).withIcon (FontAwesome.Icon.faw_question_circle).withIdentifier (7).withSelectable (false).withSetSelected (false),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_log_out).withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (8).withSelectable (false).withSetSelected (false)
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_home).withIcon (FontAwesome.Icon.faw_home).withIdentifier (1).withSetSelected (true),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_appointments).withIcon (FontAwesome.Icon.faw_calendar).withIdentifier (2).withSetSelected (true),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_history).withIcon (FontAwesome.Icon.faw_history).withIdentifier (3).withSetSelected (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_service_providers).withIcon (FontAwesome.Icon.faw_map_marker).withIdentifier (4).withSetSelected (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_rate_callsikandar).withIcon (FontAwesome.Icon.faw_star).withIdentifier (5).withSelectable (false).withSetSelected (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_manage_vehicles).withIcon (FontAwesome.Icon.faw_car).withIdentifier (6).withSetSelected (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_settings).withIcon (FontAwesome.Icon.faw_cog).withIdentifier (7).withSetSelected (false).withSelectable (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_support).withIcon (FontAwesome.Icon.faw_question_circle).withIdentifier (8).withSelectable (false).withSetSelected (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_log_out).withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (9).withSelectable (false).withSetSelected (false)
 //                        new DividerDrawerItem (),
 //                        new SecondaryDrawerItem ().withName (R.string.drawer_item_settings).withEnabled (false).withSelectable (false).withIdentifier (2),
 //                        new SecondaryDrawerItem ().withName (R.string.drawer_item_help_and_feedback).withEnabled (false).withSelectable (false).withIdentifier (3),
@@ -170,10 +203,36 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemClick (View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
+
+                        if ((int) drawerItem.getIdentifier () != 1) {
+                            fabHomeMenu.setVisibility (View.GONE);
+                        } else {
+                            fabHomeMenu.setVisibility (View.VISIBLE);
+                        }
+
+                        if ((int) drawerItem.getIdentifier () != 6) {
+                            fabAddVehicle.setVisibility (View.GONE);
+                        } else {
+                            fabAddVehicle.setVisibility (View.VISIBLE);
+                        }
+
+
                         switch ((int) drawerItem.getIdentifier ()) {
+                            case 1:
+                                fragment = new HomeFragment ();
+                                break;
+                            case 2:
+                                fragment = new AppointmentFragment ();
+                                break;
+                            case 3:
+                                fragment = new HistoryFragment ();
+                                break;
                             case 4:
+                                fragment = new ServiceProviderFragment ();
+                                break;
+                            case 5:
 //                                final String appPackageName = getPackageName (); // getPackageName() from Context or Activity object
-                                final String appPackageName = "com.actiknow.callsikandar";
+                                final String appPackageName = "actiknow.callsikandar";
                                 try {
                                     startActivity (new Intent (Intent.ACTION_VIEW, Uri.parse ("market://details?id=" + appPackageName)));
                                 } catch (android.content.ActivityNotFoundException anfe) {
@@ -181,11 +240,43 @@ public class MainActivity extends AppCompatActivity {
                                 }
 
                                 break;
+                            case 6:
+                                fragment = new ManageVehicleFragment ();
+                                break;
+                            case 7:
+                                final Handler handler = new Handler ();
+                                handler.postDelayed (new Runnable () {
+                                    @Override
+                                    public void run () {
+                                        Intent intent = new Intent (MainActivity.this, SettingActivity.class);
+                                        startActivity (intent);
+                                        overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+                                    }
+                                }, 150);
+                                break;
                             case 8:
+                                break;
+                            case 9:
                                 showLogOutDialog ();
-                                Utils.showLog (Log.ERROR, "position ", "" + position, true);
                                 break;
                         }
+
+                        if (fragment != null) {
+                            // update the main content by replacing fragments
+                            FragmentManager fragmentManager = getSupportFragmentManager ();
+                            fragmentManager.beginTransaction ()
+                                    .replace (R.id.main_content, fragment)
+                                    .commit ();
+                        }
+
+
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+//                            if (! settingsCheck && getFragmentManager ().findFragmentByTag ("preference") != null) {
+//                                getFragmentManager ().beginTransaction ().remove (getFragmentManager ().findFragmentByTag ("preference")).commit ();
+//                            }
+//                        }
+
+
                         return false;
                     }
                 })

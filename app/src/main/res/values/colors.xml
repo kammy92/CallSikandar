@@ -16,6 +16,7 @@
     <color name="text_color_grey_light">#bebebe</color>
     <color name="text_color_grey_light2">#e0e0da</color>
     <color name="text_color_grey_dark">#858585</color>
+    <color name="text_color_grey_dark2">#4b4b4b</color>
     <color name="text_color_blue">#311b92</color>
     <color name="pressed_color">#bebebe</color>
     <color name="default_color">#eeeeee</color>

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/clMain"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/app_background_grey"
+    tools:context="com.actiknow.callsikandar.activity.HomeActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:visibility="visible"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar1"
+                style="@style/Widget.MyApp.ActionBar"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:background="@color/primary"
+                android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+                app:layout_collapseMode="parallax">
+                <RelativeLayout
+                    android:id="@+id/toolbar_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical">
+                    <!--
+                                        <ImageView
+                                            android:id="@+id/imageView"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/ic_navigation_menu"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_alignParentStart="true"/>
+                    -->
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+            <android.support.design.widget.CoordinatorLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                tools:context="com.actiknow.liveaudit.activity.MainActivity">
+
+            </android.support.design.widget.CoordinatorLayout>
+        </android.support.design.widget.AppBarLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appBar">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/etUserprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/text_color_grey_light"
+                    android:padding="@dimen/edittext_padding"
+                    android:text="USER PROFILE"
+                    android:textColor="@color/text_color_grey_dark2"
+                    android:textSize="@dimen/text_size_medium"
+                />
+                <LinearLayout
+                    android:id="@+id/namel1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/activity_margin"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="Name"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_medium"/>
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="Karman Singh"
+                        android:textColor="@color/text_color_grey_dark2"
+                        android:textSize="@dimen/text_size_medium"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/activity_margin"
+                    android:weightSum="2">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="Phone Number"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_medium"/>
+                    <TextView
+                        android:id="@+id/tvPhoneNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="Phone Number"
+                        android:textColor="@color/text_color_grey_dark2"
+                        android:textSize="@dimen/text_size_medium"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/activity_margin"
+                    android:weightSum="3">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="Email"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_medium"
+                    />
+
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="Email"
+                        android:textColor="@color/text_color_grey_dark2"
+                        android:textSize="@dimen/text_size_medium"
+                    />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/activity_margin"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="Password"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_medium"/>
+
+                    <TextView
+                        android:id="@+id/tvChangePassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="Change Password"
+                        android:textColor="@color/text_color_grey_dark2"
+                        android:textSize="@dimen/text_size_medium"
+                    />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/activity_margin"
+                    android:visibility="visible"
+                    android:weightSum="2">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="Version"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_medium"
+                    />
+
+                    <TextView
+                        android:id="@+id/tvVersion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="1.0.0"
+                        android:textColor="@color/text_color_grey_dark2"
+                        android:textSize="@dimen/text_size_medium"
+                    />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/text_color_grey_light"
+                        android:padding="@dimen/edittext_padding"
+                        android:text="OTHER"
+                        android:textColor="@color/text_color_grey_dark2"
+                        android:textSize="@dimen/text_size_medium"
+                        android:visibility="visible"
+                    />
+
+                    <TextView
+                        android:id="@+id/tvTerms"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/activity_margin"
+                        android:text="Terms of Use"
+                        android:textColor="@color/text_color_grey_dark2"
+                        android:textSize="@dimen/text_size_medium"
+                        android:visibility="visible"
+                    />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <!--
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/linearLayout"
+                    android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+                    android:layout_below="@+id/appBar">
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/textview"
+                        android:layout_margin="@dimen/activity_margin">
+                        <EditText
+                            android:id="@+id/etPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Mobile Number"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:padding="@dimen/edittext_padding"
+                            android:textSize="@dimen/text_size_medium"/>
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+
+         -->
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

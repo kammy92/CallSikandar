@@ -35,15 +35,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center_vertical">
-<!--
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_navigation_menu"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"/>
--->
+                    <!--
+                                        <ImageView
+                                            android:id="@+id/imageView"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/ic_navigation_menu"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_alignParentStart="true"/>
+                    -->
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
             <android.support.design.widget.CoordinatorLayout
@@ -58,28 +58,49 @@
             </android.support.design.widget.CoordinatorLayout>
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
+
+        <LinearLayout
+            android:id="@+id/main_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/appBar"
-            android:layout_marginTop="@dimen/activity_margin"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin">
+            android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvHomeList"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_alignParentBottom="true"
-                android:fillViewport="true"
-                android:scrollbarStyle="insideOverlay"/>
-        </android.support.v4.widget.SwipeRefreshLayout>
+
+        </LinearLayout>
+
+
+        <!--
+
+                <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe_refresh_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/appBar"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvHomeList"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentBottom="true"
+                        android:fillViewport="true"
+                        android:scrollbarStyle="insideOverlay"/>
+                </android.support.v4.widget.SwipeRefreshLayout>
+
+        -->
+
         <com.github.clans.fab.FloatingActionMenu
-            android:id="@+id/fabMenu"
+            android:id="@+id/fabHomeMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:menu_animationDelayPerItem="50"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:visibility="visible"
+            fab:menu_animationDelayPerItem="60"
             fab:menu_buttonSpacing="0dp"
             fab:menu_colorNormal="@color/primary"
             fab:menu_colorPressed="@color/primary_dark"
@@ -107,77 +128,74 @@
             fab:menu_labels_textSize="@dimen/text_size_small"
             fab:menu_openDirection="up"
             fab:menu_shadowColor="#66000000"
-            fab:menu_shadowRadius="4dp"
-            fab:menu_shadowXOffset="1dp"
-            fab:menu_shadowYOffset="3dp"
-            fab:menu_showShadow="true" android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true" android:layout_alignParentEnd="true">
+            fab:menu_shadowRadius="4dp" fab:menu_shadowXOffset="1dp"
+            fab:menu_shadowYOffset="3dp" fab:menu_showShadow="true">
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fabRequestEstimate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_fab_request_estimate"
-                fab:fab_label="Request Estimate"
-                fab:fab_size="mini"
                 fab:fab_colorNormal="@color/fab_1"
                 fab:fab_colorPressed="@color/fab_1_pressed"
-                fab:fab_colorRipple="@color/ripple_color"/>
+                fab:fab_colorRipple="@color/ripple_color"
+                fab:fab_label="Request Estimate"
+                fab:fab_size="mini"/>
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fabRegularService"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_fab_regular_service"
-                fab:fab_label="Regular Service"
-                fab:fab_size="mini"
                 fab:fab_colorNormal="@color/fab_2"
                 fab:fab_colorPressed="@color/fab_2_pressed"
-                fab:fab_colorRipple="@color/ripple_color"/>
+                fab:fab_colorRipple="@color/ripple_color"
+                fab:fab_label="Regular Service"
+                fab:fab_size="mini"/>
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fabRepairs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_fab_repairs"
-                fab:fab_label="Repairs"
-                fab:fab_size="mini"
                 fab:fab_colorNormal="@color/fab_3"
                 fab:fab_colorPressed="@color/fab_3_pressed"
-                fab:fab_colorRipple="@color/ripple_color"/>
+                fab:fab_colorRipple="@color/ripple_color"
+                fab:fab_label="Repairs"
+                fab:fab_size="mini"/>
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fabDentsAndPaint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_fab_dents_and_paint"
-                fab:fab_label="Dents &amp; Paint"
-                fab:fab_size="mini"
                 fab:fab_colorNormal="@color/fab_4"
                 fab:fab_colorPressed="@color/fab_4_pressed"
-                fab:fab_colorRipple="@color/ripple_color"/>
+                fab:fab_colorRipple="@color/ripple_color"
+                fab:fab_label="Dents &amp; Paint"
+                fab:fab_size="mini"/>
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fabCarCleaning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_fab_car_cleaning"
-                fab:fab_label="Car Cleaning"
-                fab:fab_size="mini"
                 fab:fab_colorNormal="@color/fab_5"
                 fab:fab_colorPressed="@color/fab_5_pressed"
-                fab:fab_colorRipple="@color/ripple_color"/>
+                fab:fab_colorRipple="@color/ripple_color"
+                fab:fab_label="Car Cleaning"
+                fab:fab_size="mini"/>
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fabAccessories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_fab_accessories"
-                fab:fab_label="Accessories"
-                fab:fab_size="mini"
                 fab:fab_colorNormal="@color/fab_6"
                 fab:fab_colorPressed="@color/fab_6_pressed"
-                fab:fab_colorRipple="@color/ripple_color"/>
+                fab:fab_colorRipple="@color/ripple_color"
+                fab:fab_label="Accessories"
+                fab:fab_size="mini"/>
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fabBreakdown"
@@ -185,13 +203,30 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_fab_breakdown"
 
-                fab:fab_label="Breakdown"
-                fab:fab_size="mini"
                 fab:fab_colorNormal="@color/fab_7"
                 fab:fab_colorPressed="@color/fab_7_pressed"
-                fab:fab_colorRipple="@color/ripple_color"/>
+                fab:fab_colorRipple="@color/ripple_color"
+                fab:fab_label="Breakdown"
+                fab:fab_size="mini"/>
 
         </com.github.clans.fab.FloatingActionMenu>
+
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabAddVehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            android:src="@drawable/fab_add"
+            android:visibility="gone"
+            fab:fab_colorNormal="@color/fab_1"
+            fab:fab_colorPressed="@color/fab_1_pressed"
+            fab:fab_colorRipple="@color/ripple_color"
+            fab:fab_label="Request Estimate"
+            fab:fab_size="normal"/>
 
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

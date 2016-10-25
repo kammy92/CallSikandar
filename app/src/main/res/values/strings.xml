@@ -22,6 +22,7 @@
     <string name="dialog_validation_title">Validation Error</string>
 
 
+    <string name="drawer_item_home">Home</string>
     <string name="drawer_item_appointments">Appointments</string>
     <string name="drawer_item_history">History</string>
     <string name="drawer_item_service_providers">Service Providers</string>
@@ -40,6 +41,8 @@
 
     <string name="activity_title_sign_up">Sign Up</string>
     <string name="activity_title_log_in">Log In</string>
+    <string name="activity_title_terms_of_use">Terms Of Use</string>
+    <string name="activity_title_settings">Settings</string>
 
 
 </resources>
