@@ -25,10 +25,10 @@ import android.widget.TextView;
 
 import com.actiknow.callsikandar.R;
 import com.actiknow.callsikandar.fragment.AppointmentFragment;
-import com.actiknow.callsikandar.fragment.HistoryFragment;
 import com.actiknow.callsikandar.fragment.HomeFragment;
 import com.actiknow.callsikandar.fragment.ManageVehicleFragment;
 import com.actiknow.callsikandar.fragment.ServiceProviderFragment;
+import com.actiknow.callsikandar.fragment.ServiceRequestFragment;
 import com.actiknow.callsikandar.utils.Constants;
 import com.actiknow.callsikandar.utils.LoginDetailsPref;
 import com.actiknow.callsikandar.utils.SetTypeFace;
@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         initData ();
         initView ();
         isLogin ();
+        initListener ();
         setUpNavigationDrawer ();
         initDrawer ();
 
@@ -185,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                 .addDrawerItems (
                         new PrimaryDrawerItem ().withName (R.string.drawer_item_home).withIcon (FontAwesome.Icon.faw_home).withIdentifier (1).withSetSelected (true),
                         new PrimaryDrawerItem ().withName (R.string.drawer_item_appointments).withIcon (FontAwesome.Icon.faw_calendar).withIdentifier (2).withSetSelected (true),
-                        new PrimaryDrawerItem ().withName (R.string.drawer_item_history).withIcon (FontAwesome.Icon.faw_history).withIdentifier (3).withSetSelected (false),
+                        new PrimaryDrawerItem ().withName (R.string.drawer_item_service_requests).withIcon (FontAwesome.Icon.faw_file_text_o).withIdentifier (3).withSetSelected (false),
                         new PrimaryDrawerItem ().withName (R.string.drawer_item_service_providers).withIcon (FontAwesome.Icon.faw_map_marker).withIdentifier (4).withSetSelected (false),
                         new PrimaryDrawerItem ().withName (R.string.drawer_item_rate_callsikandar).withIcon (FontAwesome.Icon.faw_star).withIdentifier (5).withSelectable (false).withSetSelected (false),
                         new PrimaryDrawerItem ().withName (R.string.drawer_item_manage_vehicles).withIcon (FontAwesome.Icon.faw_car).withIdentifier (6).withSetSelected (false),
@@ -225,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
                                 fragment = new AppointmentFragment ();
                                 break;
                             case 3:
-                                fragment = new HistoryFragment ();
+                                fragment = new ServiceRequestFragment ();
                                 break;
                             case 4:
                                 fragment = new ServiceProviderFragment ();
@@ -285,6 +286,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+    private void initListener () {
+        fabAddVehicle.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                Intent intent = new Intent (MainActivity.this, AddVehicleActivity.class);
+                intent.putExtra ("update_vehicle", false);
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+    }
+
 
     private void showLogOutDialog () {
         TextView tvMessage;

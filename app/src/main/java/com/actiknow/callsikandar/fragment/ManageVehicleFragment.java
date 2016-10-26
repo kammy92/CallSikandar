@@ -32,11 +32,9 @@ import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 
 public class ManageVehicleFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    public static ArrayList<Vehicle> vehicleList = new ArrayList<Vehicle> ();
     RecyclerView rvVehicleList;
     SwipeRefreshLayout swipeRefreshLayout;
-
-    ArrayList<Vehicle> vehicleList = new ArrayList<Vehicle> ();
-
     AllVehicleAdapter adapter;
 
     public ManageVehicleFragment () {
@@ -54,9 +52,9 @@ public class ManageVehicleFragment extends Fragment implements SwipeRefreshLayou
     }
 
     private void initData () {
-        Vehicle vehicle1 = new Vehicle ("Polo", "DL 6SM 1234", "Volkswagen", "14000", "12/02/2016", "Petrol");
-        Vehicle vehicle2 = new Vehicle ("Ecosport", "DL 6SM 2345", "Ford", "15560", "20/06/2016", "Petrol");
-
+        vehicleList.clear ();
+        Vehicle vehicle1 = new Vehicle (1, "Polo", "DL 6SM 1234", "Volkswagen", "14000", "12/02/2016", "Petrol");
+        Vehicle vehicle2 = new Vehicle (2, "Ecosport", "DL 6SM 2345", "Ford", "15560", "20/06/2016", "Petrol");
         vehicleList.add (vehicle1);
         vehicleList.add (vehicle2);
         adapter = new AllVehicleAdapter (getActivity (), vehicleList);
@@ -67,10 +65,8 @@ public class ManageVehicleFragment extends Fragment implements SwipeRefreshLayou
         rvVehicleList.setHasFixedSize (true);
         rvVehicleList.setLayoutManager (new LinearLayoutManager (getActivity ()));
         rvVehicleList.setItemAnimator (new DefaultItemAnimator ());
-
 //        swipeRefreshLayout.setRefreshing (true);
 //        getAllVehicles ();
-
     }
 
     private void initView (View v) {
@@ -121,7 +117,7 @@ public class ManageVehicleFragment extends Fragment implements SwipeRefreshLayou
         handler.postDelayed (new Runnable () {
             @Override
             public void run () {
-                Vehicle vehicle1 = new Vehicle ("Polo", "DL 6SM 1234", "Volkswagen", "14000", "12/02/2016", "Petrol");
+                Vehicle vehicle1 = new Vehicle (1, "Polo", "DL 6SM 1234", "Volkswagen", "14000", "12/02/2016", "Petrol");
                 vehicleList.add (vehicle1);
                 adapter.notifyDataSetChanged ();
                 swipeRefreshLayout.setRefreshing (false);

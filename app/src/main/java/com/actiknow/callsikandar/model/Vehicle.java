@@ -5,23 +5,33 @@ package com.actiknow.callsikandar.model;
  */
 
 public class Vehicle {
-    private String model, registration_number, manufacturer, km_reading, last_service_date, fuel_type;
+    int id;
+    private String make_and_model, registration_number, year_of_manufacture, km_reading, last_service_date, fuel_type;
 
-    public Vehicle (String model, String registration_number, String manufacturer, String km_reading, String last_service_date, String fuel_type) {
-        this.model = model;
+    public Vehicle (int id, String make_and_model, String registration_number, String year_of_manufacture, String km_reading, String last_service_date, String fuel_type) {
+        this.id = id;
+        this.make_and_model = make_and_model;
         this.registration_number = registration_number;
-        this.manufacturer = manufacturer;
+        this.year_of_manufacture = year_of_manufacture;
         this.km_reading = km_reading;
         this.last_service_date = last_service_date;
         this.fuel_type = fuel_type;
     }
 
-    public String getModel () {
-        return model;
+    public int getId () {
+        return id;
     }
 
-    public void setModel (String model) {
-        this.model = model;
+    public void setId (int id) {
+        this.id = id;
+    }
+
+    public String getMake_and_model () {
+        return make_and_model;
+    }
+
+    public void setMake_and_model (String make_and_model) {
+        this.make_and_model = make_and_model;
     }
 
     public String getRegistration_number () {
@@ -32,12 +42,12 @@ public class Vehicle {
         this.registration_number = registration_number;
     }
 
-    public String getManufacturer () {
-        return manufacturer;
+    public String getYear_of_manufacture () {
+        return year_of_manufacture;
     }
 
-    public void setManufacturer (String manufacturer) {
-        this.manufacturer = manufacturer;
+    public void setYear_of_manufacture (String year_of_manufacture) {
+        this.year_of_manufacture = year_of_manufacture;
     }
 
     public String getKm_reading () {

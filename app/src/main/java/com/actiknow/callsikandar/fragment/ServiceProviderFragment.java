@@ -3,7 +3,12 @@ package com.actiknow.callsikandar.fragment;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,13 +17,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.actiknow.callsikandar.R;
+import com.actiknow.callsikandar.adapter.AllServiceProviderAdapter;
+import com.actiknow.callsikandar.model.ServiceProvider;
 import com.actiknow.callsikandar.utils.Utils;
+
+import java.util.ArrayList;
+
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 
 /**
  * Created by Admin on 24-10-2016.
  */
 
 public class ServiceProviderFragment extends Fragment {
+    RecyclerView rvServiceProviderList;
+    SwipeRefreshLayout swipeRefreshLayout;
+    ArrayList<ServiceProvider> serviceProviderList = new ArrayList<ServiceProvider> ();
+    AllServiceProviderAdapter adapter;
+
     public ServiceProviderFragment () {
         setHasOptionsMenu (true);
     }
@@ -27,8 +43,57 @@ public class ServiceProviderFragment extends Fragment {
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate (R.layout.fragment_service_provider, container, false);
         setHasOptionsMenu (true);
+        initView (rootView);
+        initListener ();
+        initData ();
         return rootView;
     }
+
+    private void initData () {
+        ServiceProvider serviceProvider1 = new ServiceProvider (1, "Carnation - SS Automibiles", "9.31 Km", "Sector 18", "3.7");
+        ServiceProvider serviceProvider2 = new ServiceProvider (2, "Bosch Express (CNG Nation)", "9.95 Km", "DLF Phase 1", "4.3");
+        serviceProviderList.add (serviceProvider1);
+        serviceProviderList.add (serviceProvider2);
+        adapter = new AllServiceProviderAdapter (getActivity (), serviceProviderList);
+
+        AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter (adapter);
+        alphaAdapter.setDuration (700);
+        rvServiceProviderList.setAdapter (alphaAdapter);
+        rvServiceProviderList.setHasFixedSize (true);
+        rvServiceProviderList.setLayoutManager (new LinearLayoutManager (getActivity ()));
+        rvServiceProviderList.setItemAnimator (new DefaultItemAnimator ());
+//        swipeRefreshLayout.setRefreshing (true);
+//        getAllVehicles ();
+    }
+
+    private void initView (View v) {
+        rvServiceProviderList = (RecyclerView) v.findViewById (R.id.rvServiceProviderList);
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById (R.id.swipeRefreshLayout);
+    }
+
+    private void initListener () {
+        swipeRefreshLayout.setOnRefreshListener (new SwipeRefreshLayout.OnRefreshListener () {
+            @Override
+            public void onRefresh () {
+                swipeRefreshLayout.setRefreshing (true);
+                getAllServiceProviders ();
+            }
+        });
+    }
+
+    private void getAllServiceProviders () {
+        final Handler handler = new Handler ();
+        handler.postDelayed (new Runnable () {
+            @Override
+            public void run () {
+                ServiceProvider serviceProvider1 = new ServiceProvider (1, "Carnation - SS Automibiles", "9.31 Km", "Sector 18", "3.7");
+                serviceProviderList.add (serviceProvider1);
+                adapter.notifyDataSetChanged ();
+                swipeRefreshLayout.setRefreshing (false);
+            }
+        }, 1000);
+    }
+
 
     @Override
     public void onCreateOptionsMenu (Menu menu, MenuInflater inflater) {

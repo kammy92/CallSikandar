@@ -38,6 +38,10 @@
             android:name=".activity.TermOfUseActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".activity.AddVehicleActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

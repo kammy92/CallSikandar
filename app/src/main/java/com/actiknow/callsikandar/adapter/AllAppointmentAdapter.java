@@ -10,20 +10,23 @@ import android.widget.TextView;
 
 import com.actiknow.callsikandar.R;
 import com.actiknow.callsikandar.activity.AddVehicleActivity;
+import com.actiknow.callsikandar.model.Appointment;
 import com.actiknow.callsikandar.model.Vehicle;
 import com.actiknow.callsikandar.utils.SetTypeFace;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllVehicleAdapter extends RecyclerView.Adapter<AllVehicleAdapter.ViewHolder> {
+import static com.actiknow.callsikandar.fragment.ManageVehicleFragment.vehicleList;
+
+public class AllAppointmentAdapter extends RecyclerView.Adapter<AllAppointmentAdapter.ViewHolder> {
     OnItemClickListener mItemClickListener;
     private Activity activity;
-    private List<Vehicle> vehicleList = new ArrayList<Vehicle> ();
+    private List<Appointment> appointmentList = new ArrayList<Appointment> ();
 
-    public AllVehicleAdapter (Activity activity, List<Vehicle> vehicleList) {
+    public AllAppointmentAdapter (Activity activity, List<Appointment> appointmentList) {
         this.activity = activity;
-        this.vehicleList = vehicleList;
+        this.appointmentList = appointmentList;
     }
 
     @Override
@@ -35,22 +38,20 @@ public class AllVehicleAdapter extends RecyclerView.Adapter<AllVehicleAdapter.Vi
 
     @Override
     public void onBindViewHolder (ViewHolder holder, int position) {//        runEnterAnimation (holder.itemView);
-        final Vehicle vehicle = vehicleList.get (position);
-        holder.model.setTypeface (SetTypeFace.getTypeface (activity));
-        holder.registration_number.setTypeface (SetTypeFace.getTypeface (activity));
-        holder.manufacturer.setTypeface (SetTypeFace.getTypeface (activity));
-        holder.last_service_date.setTypeface (SetTypeFace.getTypeface (activity));
-        holder.fuel_type.setTypeface (SetTypeFace.getTypeface (activity));
-        holder.model.setText (vehicle.getMake_and_model ());
-        holder.registration_number.setText (vehicle.getRegistration_number ());
-        holder.manufacturer.setText (vehicle.getYear_of_manufacture ());
-        holder.last_service_date.setText (vehicle.getLast_service_date ());
-        holder.fuel_type.setText (vehicle.getFuel_type ());
+        final Appointment appointment = appointmentList.get (position);
+        holder.appointment_id.setTypeface (SetTypeFace.getTypeface (activity));
+        holder.service_type.setTypeface (SetTypeFace.getTypeface (activity));
+        holder.status.setTypeface (SetTypeFace.getTypeface (activity));
+        holder.car_registration_number.setTypeface (SetTypeFace.getTypeface (activity));
+        holder.appointment_id.setText (appointment.getId ());
+        holder.car_registration_number.setText (appointment.getCar_registration_number ());
+        holder.status.setText (appointment.getStatus ());
+        holder.service_type.setText (appointment.getService_type ());
     }
 
     @Override
     public int getItemCount () {
-        return vehicleList.size ();
+        return appointmentList.size ();
     }
 
     public void SetOnItemClickListener (final OnItemClickListener mItemClickListener) {
@@ -63,20 +64,17 @@ public class AllVehicleAdapter extends RecyclerView.Adapter<AllVehicleAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView model;
-        TextView registration_number;
-        TextView manufacturer;
-        TextView last_service_date;
-        TextView fuel_type;
+        TextView service_type;
+        TextView status;
+        TextView car_registration_number;
+        TextView appointment_id;
 
         public ViewHolder (View view) {
             super (view);
-            model = (TextView) view.findViewById (R.id.tvModel);
-            registration_number = (TextView) view.findViewById (R.id.tvRegistrationNumber);
-            manufacturer = (TextView) view.findViewById (R.id.tvManufacturer);
-            last_service_date = (TextView) view.findViewById (R.id.tvLastServiceDate);
-            fuel_type = (TextView) view.findViewById (R.id.tvFuelType);
-
+            service_type = (TextView) view.findViewById (R.id.tvModel);
+            status = (TextView) view.findViewById (R.id.tvRegistrationNumber);
+            car_registration_number = (TextView) view.findViewById (R.id.tvManufacturer);
+            appointment_id = (TextView) view.findViewById (R.id.tvLastServiceDate);
             view.setOnClickListener (this);
         }
 

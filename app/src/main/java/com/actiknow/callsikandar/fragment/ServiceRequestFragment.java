@@ -19,15 +19,15 @@ import com.actiknow.callsikandar.utils.Utils;
  */
 
 
-public class HistoryFragment extends Fragment {
+public class ServiceRequestFragment extends Fragment {
 
-    public HistoryFragment () {
+    public ServiceRequestFragment () {
         setHasOptionsMenu (true);
     }
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate (R.layout.fragment_history, container, false);
+        View rootView = inflater.inflate (R.layout.fragment_service_request, container, false);
         setHasOptionsMenu (true);
         return rootView;
     }

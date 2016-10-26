@@ -3,7 +3,12 @@ package com.actiknow.callsikandar.fragment;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,14 +17,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.actiknow.callsikandar.R;
+import com.actiknow.callsikandar.adapter.AllVehicleAdapter;
+import com.actiknow.callsikandar.model.Appointment;
+import com.actiknow.callsikandar.model.Vehicle;
 import com.actiknow.callsikandar.utils.Utils;
+
+import java.util.ArrayList;
+
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 
 /**
  * Created by Admin on 24-10-2016.
  */
 
 
-public class AppointmentFragment extends Fragment {
+public class AppointmentFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+    public static ArrayList<Appointment> appointmentList = new ArrayList<Appointment> ();
+    RecyclerView rvAppointmentList;
+    SwipeRefreshLayout swipeRefreshLayout;
+    AllVehicleAdapter adapter;
 
 
     public AppointmentFragment () {
@@ -60,6 +76,60 @@ public class AppointmentFragment extends Fragment {
         searchView.setOnQueryTextListener (queryTextListener);
 
         super.onCreateOptionsMenu (menu, inflater);
+    }
+
+
+    private void initData () {
+        vehicleList.clear ();
+        Vehicle vehicle1 = new Vehicle (1, "Polo", "DL 6SM 1234", "Volkswagen", "14000", "12/02/2016", "Petrol");
+        Vehicle vehicle2 = new Vehicle (2, "Ecosport", "DL 6SM 2345", "Ford", "15560", "20/06/2016", "Petrol");
+        vehicleList.add (vehicle1);
+        vehicleList.add (vehicle2);
+        adapter = new AllVehicleAdapter (getActivity (), vehicleList);
+
+        AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter (adapter);
+        alphaAdapter.setDuration (700);
+        rvVehicleList.setAdapter (alphaAdapter);
+        rvVehicleList.setHasFixedSize (true);
+        rvVehicleList.setLayoutManager (new LinearLayoutManager (getActivity ()));
+        rvVehicleList.setItemAnimator (new DefaultItemAnimator ());
+//        swipeRefreshLayout.setRefreshing (true);
+//        getAllVehicles ();
+    }
+
+    private void initView (View v) {
+        rvVehicleList = (RecyclerView) v.findViewById (R.id.rvVehicleList);
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById (R.id.swipeRefreshLayout);
+    }
+
+    private void initListener () {
+        swipeRefreshLayout.setOnRefreshListener (new SwipeRefreshLayout.OnRefreshListener () {
+            @Override
+            public void onRefresh () {
+                swipeRefreshLayout.setRefreshing (true);
+                getAllVehicles ();
+            }
+        });
+    }
+
+
+    private void getAllVehicles () {
+//        vehicleList.clear ();
+        final Handler handler = new Handler ();
+        handler.postDelayed (new Runnable () {
+            @Override
+            public void run () {
+                Vehicle vehicle1 = new Vehicle (1, "Polo", "DL 6SM 1234", "Volkswagen", "14000", "12/02/2016", "Petrol");
+                vehicleList.add (vehicle1);
+                adapter.notifyDataSetChanged ();
+                swipeRefreshLayout.setRefreshing (false);
+            }
+        }, 1000);
+
+    }
+
+    @Override
+    public void onRefresh () {
     }
 
 

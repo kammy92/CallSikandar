@@ -62,19 +62,21 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:animateLayoutChanges="true">
-            <TextView
-                android:id="@+id/tvasdasdd"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvCreateAccount"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/activity_margin"
-                android:layout_marginRight="@dimen/activity_margin"
-                android:gravity="center"
-                android:padding="@dimen/activity_margin"
-                android:text="service provider fragment"
-                android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_large"
-                android:textStyle="bold"/>
+                android:layout_marginRight="@dimen/activity_margin">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvServiceProviderList"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentBottom="true"
+                    android:fillViewport="true"
+                    android:scrollbarStyle="insideOverlay"/>
+            </android.support.v4.widget.SwipeRefreshLayout>
 
         </RelativeLayout>
     </RelativeLayout>
