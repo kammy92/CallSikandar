@@ -17,9 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.actiknow.callsikandar.R;
-import com.actiknow.callsikandar.adapter.AllVehicleAdapter;
+import com.actiknow.callsikandar.adapter.AllAppointmentAdapter;
 import com.actiknow.callsikandar.model.Appointment;
-import com.actiknow.callsikandar.model.Vehicle;
 import com.actiknow.callsikandar.utils.Utils;
 
 import java.util.ArrayList;
@@ -35,21 +34,21 @@ public class AppointmentFragment extends Fragment implements SwipeRefreshLayout.
     public static ArrayList<Appointment> appointmentList = new ArrayList<Appointment> ();
     RecyclerView rvAppointmentList;
     SwipeRefreshLayout swipeRefreshLayout;
-    AllVehicleAdapter adapter;
-
-
+    AllAppointmentAdapter adapter;
+    
     public AppointmentFragment () {
         setHasOptionsMenu (true);
     }
-
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate (R.layout.fragment_appointment, container, false);
         setHasOptionsMenu (true);
+        initView (rootView);
+        initData ();
+        initListener ();
         return rootView;
     }
-
 
     @Override
     public void onCreateOptionsMenu (Menu menu, MenuInflater inflater) {
@@ -60,7 +59,6 @@ public class AppointmentFragment extends Fragment implements SwipeRefreshLayout.
         if (null != searchView) {
             searchView.setSearchableInfo (searchManager.getSearchableInfo (getActivity ().getComponentName ()));
         }
-
         searchView.setQueryHint ("Search Appointment");
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener () {
             public boolean onQueryTextChange (String newText) {
@@ -78,27 +76,26 @@ public class AppointmentFragment extends Fragment implements SwipeRefreshLayout.
         super.onCreateOptionsMenu (menu, inflater);
     }
 
-
     private void initData () {
-        vehicleList.clear ();
-        Vehicle vehicle1 = new Vehicle (1, "Polo", "DL 6SM 1234", "Volkswagen", "14000", "12/02/2016", "Petrol");
-        Vehicle vehicle2 = new Vehicle (2, "Ecosport", "DL 6SM 2345", "Ford", "15560", "20/06/2016", "Petrol");
-        vehicleList.add (vehicle1);
-        vehicleList.add (vehicle2);
-        adapter = new AllVehicleAdapter (getActivity (), vehicleList);
+        appointmentList.clear ();
+        Appointment appointment1 = new Appointment (1, "Appointment 1", "DL 6SM 1234", "Paint", "Pending");
+        Appointment appointment2 = new Appointment (2, "Appointment 2", "DL 6AS 2342", "Car Cleaning", "Approved");
+        appointmentList.add (appointment1);
+        appointmentList.add (appointment2);
+        adapter = new AllAppointmentAdapter (getActivity (), appointmentList);
 
         AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter (adapter);
         alphaAdapter.setDuration (700);
-        rvVehicleList.setAdapter (alphaAdapter);
-        rvVehicleList.setHasFixedSize (true);
-        rvVehicleList.setLayoutManager (new LinearLayoutManager (getActivity ()));
-        rvVehicleList.setItemAnimator (new DefaultItemAnimator ());
+        rvAppointmentList.setAdapter (alphaAdapter);
+        rvAppointmentList.setHasFixedSize (true);
+        rvAppointmentList.setLayoutManager (new LinearLayoutManager (getActivity ()));
+        rvAppointmentList.setItemAnimator (new DefaultItemAnimator ());
 //        swipeRefreshLayout.setRefreshing (true);
 //        getAllVehicles ();
     }
 
     private void initView (View v) {
-        rvVehicleList = (RecyclerView) v.findViewById (R.id.rvVehicleList);
+        rvAppointmentList = (RecyclerView) v.findViewById (R.id.rvAppointmentList);
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById (R.id.swipeRefreshLayout);
     }
 
@@ -107,20 +104,19 @@ public class AppointmentFragment extends Fragment implements SwipeRefreshLayout.
             @Override
             public void onRefresh () {
                 swipeRefreshLayout.setRefreshing (true);
-                getAllVehicles ();
+                getAllAppointments ();
             }
         });
     }
 
-
-    private void getAllVehicles () {
+    private void getAllAppointments () {
 //        vehicleList.clear ();
         final Handler handler = new Handler ();
         handler.postDelayed (new Runnable () {
             @Override
             public void run () {
-                Vehicle vehicle1 = new Vehicle (1, "Polo", "DL 6SM 1234", "Volkswagen", "14000", "12/02/2016", "Petrol");
-                vehicleList.add (vehicle1);
+                Appointment appointment1 = new Appointment (1, "Appointment 1", "DL 6SM 1234", "Paint", "Pending");
+                appointmentList.add (appointment1);
                 adapter.notifyDataSetChanged ();
                 swipeRefreshLayout.setRefreshing (false);
             }
