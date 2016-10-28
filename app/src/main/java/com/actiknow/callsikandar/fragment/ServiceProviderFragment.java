@@ -15,11 +15,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
+import android.widget.EditText;
 
 import com.actiknow.callsikandar.R;
 import com.actiknow.callsikandar.adapter.AllServiceProviderAdapter;
 import com.actiknow.callsikandar.model.ServiceProvider;
-import com.actiknow.callsikandar.utils.Utils;
+import com.actiknow.callsikandar.utils.SetTypeFace;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,7 @@ public class ServiceProviderFragment extends Fragment {
     RecyclerView rvServiceProviderList;
     SwipeRefreshLayout swipeRefreshLayout;
     ArrayList<ServiceProvider> serviceProviderList = new ArrayList<ServiceProvider> ();
+    ArrayList<ServiceProvider> tempArrayList = new ArrayList<ServiceProvider> ();
     AllServiceProviderAdapter adapter;
 
     public ServiceProviderFragment () {
@@ -62,6 +65,7 @@ public class ServiceProviderFragment extends Fragment {
         rvServiceProviderList.setHasFixedSize (true);
         rvServiceProviderList.setLayoutManager (new LinearLayoutManager (getActivity ()));
         rvServiceProviderList.setItemAnimator (new DefaultItemAnimator ());
+        swipeRefreshLayout.setColorSchemeResources (R.color.primary);
 //        swipeRefreshLayout.setRefreshing (true);
 //        getAllVehicles ();
     }
@@ -108,7 +112,28 @@ public class ServiceProviderFragment extends Fragment {
         searchView.setQueryHint ("Search Service Provider");
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener () {
             public boolean onQueryTextChange (String newText) {
-                Utils.showToast (getActivity (), "search text home " + newText);
+                int textlength = newText.length ();
+                tempArrayList.clear ();
+
+                for (ServiceProvider serviceProvider : serviceProviderList) {
+                    if (textlength <= serviceProvider.getName ().length () || textlength <= serviceProvider.getAddress ().length ()) {
+                        if (serviceProvider.getName ().toLowerCase ().contains (newText.toLowerCase ()) || serviceProvider.getAddress ().toLowerCase ().contains (newText.toLowerCase ())) {
+                            tempArrayList.add (serviceProvider);
+                        }
+                    }
+                }
+
+                adapter = new AllServiceProviderAdapter (getActivity (), tempArrayList);
+                AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter (adapter);
+                alphaAdapter.setDuration (700);
+                alphaAdapter.setFirstOnly (true);
+                alphaAdapter.setInterpolator (new OvershootInterpolator ());
+
+//                SlideInLeftAnimationAdapter slideAdapter = new SlideInLeftAnimationAdapter (alphaAdapter);
+//                slideAdapter.setDuration (500);
+//                slideAdapter.setFirstOnly (true);
+                rvServiceProviderList.setAdapter (alphaAdapter);
+
                 return true;
             }
 
@@ -118,6 +143,10 @@ public class ServiceProviderFragment extends Fragment {
             }
         };
         searchView.setOnQueryTextListener (queryTextListener);
+
+        EditText et = (EditText) searchView.findViewById (R.id.search_src_text);
+        et.setHintTextColor (getResources ().getColor (R.color.text_color_white));
+        et.setTypeface (SetTypeFace.getTypeface (getActivity ()));
 
         super.onCreateOptionsMenu (menu, inflater);
     }

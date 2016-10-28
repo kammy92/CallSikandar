@@ -15,10 +15,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.actiknow.callsikandar.R;
 import com.actiknow.callsikandar.adapter.AllAppointmentAdapter;
 import com.actiknow.callsikandar.model.Appointment;
+import com.actiknow.callsikandar.utils.SetTypeFace;
 import com.actiknow.callsikandar.utils.Utils;
 
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class AppointmentFragment extends Fragment implements SwipeRefreshLayout.
     RecyclerView rvAppointmentList;
     SwipeRefreshLayout swipeRefreshLayout;
     AllAppointmentAdapter adapter;
-    
+
     public AppointmentFragment () {
         setHasOptionsMenu (true);
     }
@@ -73,6 +75,10 @@ public class AppointmentFragment extends Fragment implements SwipeRefreshLayout.
         };
         searchView.setOnQueryTextListener (queryTextListener);
 
+        EditText et = (EditText) searchView.findViewById (R.id.search_src_text);
+        et.setHintTextColor (getResources ().getColor (R.color.text_color_white));
+        et.setTypeface (SetTypeFace.getTypeface (getActivity ()));
+
         super.onCreateOptionsMenu (menu, inflater);
     }
 
@@ -90,6 +96,9 @@ public class AppointmentFragment extends Fragment implements SwipeRefreshLayout.
         rvAppointmentList.setHasFixedSize (true);
         rvAppointmentList.setLayoutManager (new LinearLayoutManager (getActivity ()));
         rvAppointmentList.setItemAnimator (new DefaultItemAnimator ());
+
+        swipeRefreshLayout.setColorSchemeResources (R.color.primary);
+//        swipeRefreshLayout.setColorSchemeColors (Color.BLUE, Color.YELLOW, Color.GREEN, Color.BLUE);
 //        swipeRefreshLayout.setRefreshing (true);
 //        getAllVehicles ();
     }

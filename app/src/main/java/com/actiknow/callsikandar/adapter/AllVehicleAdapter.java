@@ -36,16 +36,18 @@ public class AllVehicleAdapter extends RecyclerView.Adapter<AllVehicleAdapter.Vi
     @Override
     public void onBindViewHolder (ViewHolder holder, int position) {//        runEnterAnimation (holder.itemView);
         final Vehicle vehicle = vehicleList.get (position);
-        holder.model.setTypeface (SetTypeFace.getTypeface (activity));
+        holder.make_and_model.setTypeface (SetTypeFace.getTypeface (activity));
         holder.registration_number.setTypeface (SetTypeFace.getTypeface (activity));
-        holder.manufacturer.setTypeface (SetTypeFace.getTypeface (activity));
         holder.last_service_date.setTypeface (SetTypeFace.getTypeface (activity));
+        holder.km_reading.setTypeface (SetTypeFace.getTypeface (activity));
         holder.fuel_type.setTypeface (SetTypeFace.getTypeface (activity));
-        holder.model.setText (vehicle.getMake_and_model ());
+        holder.make_and_model.setText (vehicle.getMake_and_model ());
         holder.registration_number.setText (vehicle.getRegistration_number ());
-        holder.manufacturer.setText (vehicle.getYear_of_manufacture ());
         holder.last_service_date.setText (vehicle.getLast_service_date ());
+        holder.km_reading.setText (vehicle.getKm_reading ());
         holder.fuel_type.setText (vehicle.getFuel_type ());
+
+//        holder.fuel_type.setCompoundDrawablesWithIntrinsicBounds (FontAwesome.Icon.faw_calendar, null, null, null);
     }
 
     @Override
@@ -62,21 +64,19 @@ public class AllVehicleAdapter extends RecyclerView.Adapter<AllVehicleAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        TextView model;
+        TextView make_and_model;
         TextView registration_number;
-        TextView manufacturer;
+        TextView km_reading;
         TextView last_service_date;
         TextView fuel_type;
 
         public ViewHolder (View view) {
             super (view);
-            model = (TextView) view.findViewById (R.id.tvModel);
+            make_and_model = (TextView) view.findViewById (R.id.tvMakeAndModel);
             registration_number = (TextView) view.findViewById (R.id.tvRegistrationNumber);
-            manufacturer = (TextView) view.findViewById (R.id.tvManufacturer);
+            km_reading = (TextView) view.findViewById (R.id.tvKmReading);
             last_service_date = (TextView) view.findViewById (R.id.tvLastServiceDate);
             fuel_type = (TextView) view.findViewById (R.id.tvFuelType);
-
             view.setOnClickListener (this);
         }
 

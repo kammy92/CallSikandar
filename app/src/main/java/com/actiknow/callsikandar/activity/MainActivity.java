@@ -1,6 +1,7 @@
 package com.actiknow.callsikandar.activity;
 
 import android.app.SearchManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fabAccessories;
     FloatingActionButton fabBreakdown;
     FloatingActionButton fabAddVehicle;
+    ActionBar actionBar;
     private AccountHeader headerResult;
     private Drawer result;
     private Toolbar toolbar;
@@ -218,17 +220,23 @@ public class MainActivity extends AppCompatActivity {
                         }
 
 
+                        SpannableString s = SpannableString.valueOf ("");
+
                         switch ((int) drawerItem.getIdentifier ()) {
                             case 1:
+                                s = new SpannableString (getResources ().getString (R.string.app_name));
                                 fragment = new HomeFragment ();
                                 break;
                             case 2:
+                                s = new SpannableString ("Appointments");
                                 fragment = new AppointmentFragment ();
                                 break;
                             case 3:
+                                s = new SpannableString ("Service Requests");
                                 fragment = new ServiceRequestFragment ();
                                 break;
                             case 4:
+                                s = new SpannableString ("Service Providers");
                                 fragment = new ServiceProviderFragment ();
                                 break;
                             case 5:
@@ -236,12 +244,13 @@ public class MainActivity extends AppCompatActivity {
                                 final String appPackageName = "actiknow.callsikandar";
                                 try {
                                     startActivity (new Intent (Intent.ACTION_VIEW, Uri.parse ("market://details?id=" + appPackageName)));
-                                } catch (android.content.ActivityNotFoundException anfe) {
+                                } catch (ActivityNotFoundException anfe) {
                                     startActivity (new Intent (Intent.ACTION_VIEW, Uri.parse ("https://play.google.com/store/apps/details?id=" + appPackageName)));
                                 }
 
                                 break;
                             case 6:
+                                s = new SpannableString ("Manage Vehicles");
                                 fragment = new ManageVehicleFragment ();
                                 break;
                             case 7:
@@ -261,6 +270,9 @@ public class MainActivity extends AppCompatActivity {
                                 showLogOutDialog ();
                                 break;
                         }
+
+                        s.setSpan (new TypefaceSpan (MainActivity.this, Constants.font_name), 0, s.length (), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        actionBar.setTitle (s);
 
                         if (fragment != null) {
                             // update the main content by replacing fragments
@@ -294,6 +306,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick (View v) {
                 Intent intent = new Intent (MainActivity.this, AddVehicleActivity.class);
                 intent.putExtra ("update_vehicle", false);
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+        fabRequestEstimate.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                Intent intent = new Intent (MainActivity.this, RequestEstimateActivity.class);
                 startActivity (intent);
                 overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
             }
@@ -418,13 +438,13 @@ public class MainActivity extends AppCompatActivity {
         SpannableString s = new SpannableString (getResources ().getString (R.string.app_name));
         s.setSpan (new TypefaceSpan (MainActivity.this, Constants.font_name), 0, s.length (), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         setSupportActionBar (toolbar);
-        ActionBar actionBar = getSupportActionBar ();
+        actionBar = getSupportActionBar ();
         try {
             assert actionBar != null;
             actionBar.setDisplayHomeAsUpEnabled (false);
             actionBar.setHomeButtonEnabled (false);
             actionBar.setTitle (s);
-            actionBar.setDisplayShowTitleEnabled (false);
+            actionBar.setDisplayShowTitleEnabled (true);
         } catch (Exception ignored) {
         }
     }

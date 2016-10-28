@@ -15,11 +15,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
+import android.widget.EditText;
 
 import com.actiknow.callsikandar.R;
 import com.actiknow.callsikandar.adapter.AllVehicleAdapter;
 import com.actiknow.callsikandar.model.Vehicle;
-import com.actiknow.callsikandar.utils.Utils;
+import com.actiknow.callsikandar.utils.SetTypeFace;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,8 @@ import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 public class ManageVehicleFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     public static ArrayList<Vehicle> vehicleList = new ArrayList<Vehicle> ();
+    ArrayList<Vehicle> tempArrayList = new ArrayList<Vehicle> ();
+
     RecyclerView rvVehicleList;
     SwipeRefreshLayout swipeRefreshLayout;
     AllVehicleAdapter adapter;
@@ -53,8 +57,8 @@ public class ManageVehicleFragment extends Fragment implements SwipeRefreshLayou
 
     private void initData () {
         vehicleList.clear ();
-        Vehicle vehicle1 = new Vehicle (1, "Polo", "DL 6SM 1234", "Volkswagen", "14000", "12/02/2016", "Petrol");
-        Vehicle vehicle2 = new Vehicle (2, "Ecosport", "DL 6SM 2345", "Ford", "15560", "20/06/2016", "Petrol");
+        Vehicle vehicle1 = new Vehicle (1, "Volkswagen Polo", "DL 6SM 1234", "2010", "14000", "12/02/2016", "Petrol");
+        Vehicle vehicle2 = new Vehicle (2, "Ford Ecosport", "DL 6SM 2345", "2014", "15560", "20/06/2016", "Petrol");
         vehicleList.add (vehicle1);
         vehicleList.add (vehicle2);
         adapter = new AllVehicleAdapter (getActivity (), vehicleList);
@@ -65,6 +69,7 @@ public class ManageVehicleFragment extends Fragment implements SwipeRefreshLayou
         rvVehicleList.setHasFixedSize (true);
         rvVehicleList.setLayoutManager (new LinearLayoutManager (getActivity ()));
         rvVehicleList.setItemAnimator (new DefaultItemAnimator ());
+        swipeRefreshLayout.setColorSchemeResources (R.color.primary);
 //        swipeRefreshLayout.setRefreshing (true);
 //        getAllVehicles ();
     }
@@ -94,10 +99,31 @@ public class ManageVehicleFragment extends Fragment implements SwipeRefreshLayou
             searchView.setSearchableInfo (searchManager.getSearchableInfo (getActivity ().getComponentName ()));
         }
 
-        searchView.setQueryHint ("Search Appointment");
+        searchView.setQueryHint ("Search Vehicles");
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener () {
             public boolean onQueryTextChange (String newText) {
-                Utils.showToast (getActivity (), "search text home " + newText);
+                int textlength = newText.length ();
+                tempArrayList.clear ();
+
+                for (Vehicle vehicle : vehicleList) {
+                    if (textlength <= vehicle.getMake_and_model ().length () || textlength <= vehicle.getRegistration_number ().length ()) {
+                        if (vehicle.getMake_and_model ().toLowerCase ().contains (newText.toLowerCase ()) || vehicle.getRegistration_number ().toLowerCase ().contains (newText.toLowerCase ())) {
+                            tempArrayList.add (vehicle);
+                        }
+                    }
+                }
+
+                adapter = new AllVehicleAdapter (getActivity (), tempArrayList);
+                AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter (adapter);
+                alphaAdapter.setDuration (700);
+                alphaAdapter.setFirstOnly (true);
+                alphaAdapter.setInterpolator (new OvershootInterpolator ());
+
+//                SlideInLeftAnimationAdapter slideAdapter = new SlideInLeftAnimationAdapter (alphaAdapter);
+//                slideAdapter.setDuration (500);
+//                slideAdapter.setFirstOnly (true);
+                rvVehicleList.setAdapter (alphaAdapter);
+
                 return true;
             }
 
@@ -108,6 +134,11 @@ public class ManageVehicleFragment extends Fragment implements SwipeRefreshLayou
         };
         searchView.setOnQueryTextListener (queryTextListener);
 
+        EditText et = (EditText) searchView.findViewById (R.id.search_src_text);
+        et.setHintTextColor (getResources ().getColor (R.color.text_color_white));
+        et.setTypeface (SetTypeFace.getTypeface (getActivity ()));
+
+
         super.onCreateOptionsMenu (menu, inflater);
     }
 
@@ -117,7 +148,7 @@ public class ManageVehicleFragment extends Fragment implements SwipeRefreshLayou
         handler.postDelayed (new Runnable () {
             @Override
             public void run () {
-                Vehicle vehicle1 = new Vehicle (1, "Polo", "DL 6SM 1234", "Volkswagen", "14000", "12/02/2016", "Petrol");
+                Vehicle vehicle1 = new Vehicle (1, "Volkswagen Polo", "DL 6SM 1234", "2010", "14000", "12/02/2016", "Petrol");
                 vehicleList.add (vehicle1);
                 adapter.notifyDataSetChanged ();
                 swipeRefreshLayout.setRefreshing (false);

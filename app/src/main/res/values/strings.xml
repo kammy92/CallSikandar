@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Call Sikandar</string>
+    <string name="app_name">CallSikandar</string>
 
     <string name="create_new_account">CREATE NEW ACCOUNT</string>
     <string name="login">Already have an account ? Log in</string>
@@ -45,6 +45,7 @@
     <string name="activity_title_settings">Settings</string>
     <string name="activity_title_add_vehicle">Add Vehicle</string>
     <string name="activity_title_update_vehicle">Update Vehicle</string>
+    <string name="activity_title_service_request">Service Request</string>
 
 
     <string name="vehicle">Vehicle Make and Model</string>
@@ -55,5 +56,6 @@
 
     <string name="button_add_vehicle">ADD VEHICLE</string>
     <string name="button_update_vehicle">UPDATE VEHICLE</string>
+
 
 </resources>

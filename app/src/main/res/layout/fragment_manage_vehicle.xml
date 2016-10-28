@@ -61,7 +61,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/appBar"
             android:layout_centerInParent="true"
-            android:animateLayoutChanges="true">
+            android:animateLayoutChanges="true"
+            android:background="@color/app_background_grey">
 
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/swipeRefreshLayout"

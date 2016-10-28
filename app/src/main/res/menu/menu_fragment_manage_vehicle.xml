@@ -7,12 +7,14 @@
     <item android:id="@+id/action_search"
           android:icon="@drawable/ic_search"
           android:orderInCategory="1"
-          android:title="Search 4a"
+          android:title="Search"
           app:actionViewClass="android.support.v7.widget.SearchView"
           app:showAsAction="always"/>
+    <!--
     <item android:id="@+id/action_search2"
           android:icon="@drawable/ic_media_play"
           android:orderInCategory="2"
           android:title="Search 4b"
           app:showAsAction="always"/>
+    -->
 </menu>

@@ -60,11 +60,35 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
     boolean update_vehicle = false;
     int vehicle_id = 0;
     String CarURl = "https://api.edmunds.com/api/vehicle/v2/makes?fmt=json&api_key=8vc7bxdxztrjkjws3s9qj3a7";
+
     String carsmodel[] = {
-            "Hyundai Elantra", "Hyundai Creta", "Hyundai Grand i10", "Hyundai Elite i20",
-            "Hyundai Xcent", "Hyundai EON", "Hyundai Verna", "Hyundai Eon Facelift", "Hyundai Tucson", "Hyundai i10 MPV",
-            "Hyundai genesis", "Hyundai i20 Active"
+            "Hyundai Elantra", "Hyundai Creta", "Hyundai Grand i10", "Hyundai Elite i20", "Hyundai Xcent", "Hyundai EON", "Hyundai Verna", "Hyundai Eon Facelift", "Hyundai Tucson", "Hyundai i10 MPV", "Hyundai genesis", "Hyundai i20 Active", "Maruti Suzuki Omni", "Maruti Suzuki Alto 800", "Maruti Suzuki Eeco",
+            "Maruti Suzuki Celerio", "Maruti Suzuki Wagon R", "Maruti Suzuki Wagon R Stingray", "Maruti Suzuki Alto K10", "Maruti Suzuki Ritz", "Maruti Suzuki Swift", "Maruti Suzuki Swift Dezire", "Tata Tiago", "Tata Zest",
+            "Tata Nabo", "Tata Bolt", "Tata Safari", "Tata Indica", "Tata Indigo",
+            "Mercedes-Benz CLS-Class", "Mercedes-Benz E-Class", "Mercedes-Benz GLK-Class", "Mercedes-Benz AMG-Class", "Mercedes-Benz AMG CLA-Class", "Mercedes-Benz AMG C43-Class",
+            "BMW 1", "BMW 3", "BMW Gran Turismo", "BMW 5", "BMW X3", "BMW X5",
+            "Volkswagen Passat", "Volkswagen Polo", "Volkswagen Tiguan", "Volkswagen Polo GTI", "Volkswagen Ameo", "Volkswagen Vento",
+            "Honda Brio", "Honda Amaze", "Honda Mobilio", "Honda City", "Honda BR-V", "Honda CR-V", "Honda Accord", "Honda Accord Hybrid", "Honda Jazz", "Honda City", "Honda Civic",
+            "Audi A3", "Audi A4", "Audi A6", "Audi A7", "Audi A8", "Audi Q3", "Audi Q5", "Audi Q7", "Audi R8", "Audi TT", "Audi S6", "Audi S4", "Audi RS7", "Audi RS5",
+            "Mahindra Supro", "Mahindra Verito", "Mahindra Scorpio", "Mahindra XUV", "Mahindra Logan", "Mahindra Ghibli", "Mahindra NuvoSport", "Mahindra Bolero", "Mahindra Quanto", "Mahindra Xylo",
+            "Toyota Corolla Altis", "Toyota Camry", "Toyota Corolla", "Toyota Etios", "Toyota Fortuner", "Toyota Innova", "Toyota Land Cruiser", "Toyota Prius", "Toyota Qualis",
+            "Chevrolet Spark", "Chevrolet Beat", "Chevrolet Sail", "Chevrolet Enjoy",
+            "Chevrolet Tavera", "Chevrolet Cruize", "Fiat Punto", "Fiat Linea", "Fiat Avventura", "Fiat Urban Cross",
+            "Fiat Abarth", "Fiat Panda", "Ford Figo", "Ford Aspire", "Ford EcoSport", "Ford Endeavour", "Ford Mustang", "Ford Fiesta", "Ford Classic",
+            "Mitsubishi Outlander", "Mitsubishi Outlander", "Mitsubishi Lancer", "Mitsubishi Galant", "Mitsubishi Carisma", "Mitsubishi Pajero", "Mitsubishi Eclipse",
+            "Nissan Terrano", "Nissan Micra", "Nissan GTR", "Nissan Sunny", "Nissan Evalia", "Nissan Patrol", "Nissan X Trail",
+            "Renault Kwid", "Renault Pulse", "Renault Scala", "Renalut Duster", "Renault Lodgy", "Renault Fluence", "Renault Koleos",
+            "Skoda Fabia", "Skoda Rapid", "Skoda Octavia", "Skoda Laura", "Skoda Yeti", "Skoda Superb"
     };
+
+    /*
+     String carsmodel[] = {
+             "Hyundai Elantra", "Hyundai Creta", "Hyundai Grand i10", "Hyundai Elite i20",
+             "Hyundai Xcent", "Hyundai EON", "Hyundai Verna", "Hyundai Eon Facelift", "Hyundai Tucson", "Hyundai i10 MPV",
+             "Hyundai genesis", "Hyundai i20 Active"
+     };
+
+     */
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -121,7 +145,6 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
             tvAddVehicle.setVisibility (View.VISIBLE);
             tvUpdateVehicle.setVisibility (View.GONE);
         } else {
-
             Vehicle vehicle = ManageVehicleFragment.vehicleList.get (vehicle_id - 1);
             etCarModel.setText (vehicle.getMake_and_model ());
             etRegistrationNumber.setText (vehicle.getRegistration_number ());

@@ -1,47 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:padding="10dp"
->
-
-    <TextView
-        android:id="@+id/tvModel"
+<android.support.v7.widget.CardView
+    android:id="@+id/card_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/activity_margin"
+    android:clickable="true"
+    android:elevation="5dp"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="10dp">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="Volkswagen Polo"
-        android:textStyle="bold"
-    />
-
-    <TextView
-        android:id="@+id/tvRegistrationNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="DL 6AM 2345"/>
-
-    <TextView
-        android:id="@+id/tvManufacturer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="Volkswagen"/>
-
-    <TextView
-        android:id="@+id/tvLastServiceDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="24/12/2015"
-    />
-
-    <TextView
-        android:id="@+id/tvFuelType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="Petrol"
-    />
-</LinearLayout>
+        android:layout_margin="@dimen/activity_margin"
+        android:orientation="vertical"
+    >
+        <TextView
+            android:id="@+id/tvMakeAndModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="Volkswagen Polo"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:orientation="vertical"
+            android:weightSum="4">
+            <TextView
+                android:id="@+id/tvRegistrationNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="DL 6AM 2345"
+                android:textSize="@dimen/text_size_medium"/>
+            <TextView
+                android:id="@+id/tvFuelType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Petrol"
+                android:textSize="@dimen/text_size_medium"/>
+            <TextView
+                android:id="@+id/tvKmReading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="1000 K.M"
+                android:textSize="@dimen/text_size_medium"/>
+            <TextView
+                android:id="@+id/tvLastServiceDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="24/12/2015"
+                android:textSize="@dimen/text_size_medium"/>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
+    <!--
+        android:drawableLeft="@drawable/ic_fuel"
+        android:drawableLeft="@drawable/ic_km"
+        android:drawableLeft="@drawable/ic_calendar"
+        android:drawableLeft="@drawable/ic_car_plate"
+    -->

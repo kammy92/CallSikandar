@@ -11,8 +11,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.actiknow.callsikandar.R;
+import com.actiknow.callsikandar.utils.SetTypeFace;
 import com.actiknow.callsikandar.utils.Utils;
 
 /**
@@ -54,6 +56,11 @@ public class HomeFragment extends Fragment {
         };
         searchView.setOnQueryTextListener (queryTextListener);
 
+        EditText et = (EditText) searchView.findViewById (R.id.search_src_text);
+        et.setHintTextColor (getResources ().getColor (R.color.text_color_white));
+        et.setTypeface (SetTypeFace.getTypeface (getActivity ()));
+
+
         super.onCreateOptionsMenu (menu, inflater);
     }
 
@@ -74,8 +81,6 @@ public class HomeFragment extends Fragment {
 //                } else {
 //                    etSearch.setVisibility (View.VISIBLE);
 //                }
-                break;
-            case R.id.action_search2:
                 break;
         }
         Utils.hideSoftKeyboard (getActivity ());
