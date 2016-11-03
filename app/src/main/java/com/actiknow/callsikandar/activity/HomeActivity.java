@@ -18,6 +18,7 @@ public class HomeActivity extends AppCompatActivity {
     TextView tvCreateAccount;
     TextView tvLogIn;
     ImageView ivLogo;
+    
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
