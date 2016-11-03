@@ -109,7 +109,7 @@ public class ServiceProviderFragment extends Fragment {
             searchView.setSearchableInfo (searchManager.getSearchableInfo (getActivity ().getComponentName ()));
         }
 
-        searchView.setQueryHint ("Search Service Provider");
+        searchView.setQueryHint ("Search Providers");
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener () {
             public boolean onQueryTextChange (String newText) {
                 int textlength = newText.length ();
@@ -145,7 +145,7 @@ public class ServiceProviderFragment extends Fragment {
         searchView.setOnQueryTextListener (queryTextListener);
 
         EditText et = (EditText) searchView.findViewById (R.id.search_src_text);
-        et.setHintTextColor (getResources ().getColor (R.color.text_color_white));
+        et.setHintTextColor (getResources ().getColor (R.color.hint_color_white));
         et.setTypeface (SetTypeFace.getTypeface (getActivity ()));
 
         super.onCreateOptionsMenu (menu, inflater);

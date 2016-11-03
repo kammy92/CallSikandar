@@ -318,6 +318,57 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
+
+        fabAccessories.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                Intent intent = new Intent (MainActivity.this, ServicesListActivity.class);
+                intent.putExtra ("service_type_id", 1);
+                intent.putExtra ("service_type_name", "Accessories");
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+        fabCarCleaning.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                Intent intent = new Intent (MainActivity.this, ServicesListActivity.class);
+                intent.putExtra ("service_type_id", 2);
+                intent.putExtra ("service_type_name", "Car Cleaning");
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+        fabDentsAndPaint.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                Intent intent = new Intent (MainActivity.this, ServicesListActivity.class);
+                intent.putExtra ("service_type_id", 3);
+                intent.putExtra ("service_type_name", "Dents & Paint");
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+        fabRegularService.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                Intent intent = new Intent (MainActivity.this, ServicesListActivity.class);
+                intent.putExtra ("service_type_id", 4);
+                intent.putExtra ("service_type_name", "Regular Service");
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+        fabRepairs.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                Intent intent = new Intent (MainActivity.this, ServicesListActivity.class);
+                intent.putExtra ("service_type_id", 5);
+                intent.putExtra ("service_type_name", "Repairs");
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
     }
 
 

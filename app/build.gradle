@@ -40,6 +40,8 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.afollestad.material-dialogs:commons:0.9.0.2'
     compile 'com.wang.avi:library:1.0.5'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 
 
 }

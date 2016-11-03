@@ -30,6 +30,8 @@ public class AppConfigURL {
 
 
     public static String URL_GETOTP = "https://callsikandar-api-cammy92.c9users.io/api/v1/user/otp";
+    public static String URL_GETALLVEHICLES = "https://callsikandar-api-cammy92.c9users.io/api/v1/user/vehicles";
+    public static String URL_ADDNEWVEHICLE = "https://callsikandar-api-cammy92.c9users.io/api/v1/user/vehicle";
 
 
 }

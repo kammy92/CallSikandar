@@ -56,4 +56,14 @@ public class AppConfigTags {
     public static final String DATABASE_LOG = "DATABASE LOG";
 
 
+    public static final String VEHICLES = "vehicles";
+    public static final String VEHICLE_ID = "vehicle_id";
+    public static final String MAKE_AND_MODEL = "make_and_model";
+    public static final String YEAR_OF_MANUFACTURE = "year_of_manufacture";
+    public static final String KM_READING = "km_reading";
+    public static final String REGISTRATION_NUMBER = "registration_number";
+    public static final String LAST_SERVICE_DATE = "last_service_date";
+    public static final String FUEL_TYPE = "fuel_type";
+
+
 }

@@ -61,7 +61,7 @@ public class AppointmentFragment extends Fragment implements SwipeRefreshLayout.
         if (null != searchView) {
             searchView.setSearchableInfo (searchManager.getSearchableInfo (getActivity ().getComponentName ()));
         }
-        searchView.setQueryHint ("Search Appointment");
+        searchView.setQueryHint ("Search Appointments");
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener () {
             public boolean onQueryTextChange (String newText) {
                 Utils.showToast (getActivity (), "search text home " + newText);
@@ -76,7 +76,7 @@ public class AppointmentFragment extends Fragment implements SwipeRefreshLayout.
         searchView.setOnQueryTextListener (queryTextListener);
 
         EditText et = (EditText) searchView.findViewById (R.id.search_src_text);
-        et.setHintTextColor (getResources ().getColor (R.color.text_color_white));
+        et.setHintTextColor (getResources ().getColor (R.color.hint_color_white));
         et.setTypeface (SetTypeFace.getTypeface (getActivity ()));
 
         super.onCreateOptionsMenu (menu, inflater);

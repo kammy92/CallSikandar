@@ -1,6 +1,7 @@
 package com.actiknow.callsikandar.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.actiknow.callsikandar.R;
+import com.actiknow.callsikandar.activity.ServiceProviderDetailActivity;
 import com.actiknow.callsikandar.model.ServiceProvider;
 import com.actiknow.callsikandar.utils.SetTypeFace;
 
@@ -75,7 +77,14 @@ public class AllServiceProviderAdapter extends RecyclerView.Adapter<AllServicePr
 
         @Override
         public void onClick (View v) {
-//            final Atm atm = atmList.get (getLayoutPosition ());
+            final ServiceProvider serviceProvider = serviceProviderList.get (getLayoutPosition ());
+            Intent intent = new Intent (activity, ServiceProviderDetailActivity.class);
+            intent.putExtra ("service_provider_id", serviceProvider.getId ());
+            intent.putExtra ("service_provider_name", serviceProvider.getName ());
+            activity.startActivity (intent);
+            activity.overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+
+
 //            Constants.report.setAtm_id (atm.getAtm_id ());
 //            Constants.report.setAuditor_id (Constants.auditor_id_main);
 //            Constants.report.setAgency_id (atm.getAtm_agency_id ());

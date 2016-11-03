@@ -25,8 +25,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actiknow.callsikandar.activity.MainActivity;
 import com.actiknow.callsikandar.R;
+import com.actiknow.callsikandar.activity.MainActivity;
 import com.actiknow.callsikandar.app.AppController;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -89,16 +89,16 @@ public class Utils {
         }
     }
 
-    public static String convertTimeFormat (String OrigFormat) {
-        if (OrigFormat != "null") {
-            SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+    public static String convertTimeFormat (String dateInOriginalFormat, String originalFormat, String requiredFormat) {
+        if (dateInOriginalFormat != "null") {
+            SimpleDateFormat sdf = new SimpleDateFormat (originalFormat);//yyyy-MM-dd");
             Date testDate = null;
             try {
-                testDate = sdf.parse (OrigFormat);
+                testDate = sdf.parse (dateInOriginalFormat);
             } catch (Exception ex) {
                 ex.printStackTrace ();
             }
-            SimpleDateFormat formatter = new SimpleDateFormat ("dd/MM/yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat (requiredFormat);
             String newFormat = formatter.format (testDate);
             return newFormat;
         } else {

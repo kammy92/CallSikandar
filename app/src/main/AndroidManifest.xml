@@ -46,6 +46,22 @@
             android:name=".activity.RequestEstimateActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".activity.ServicesListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.ServiceDetailsListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.ServiceDetailActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.ServiceProviderDetailActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

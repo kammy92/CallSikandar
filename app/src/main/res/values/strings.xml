@@ -57,5 +57,11 @@
     <string name="button_add_vehicle">ADD VEHICLE</string>
     <string name="button_update_vehicle">UPDATE VEHICLE</string>
 
+    <string name="Rs">\u20B9</string>
+
+    <string name="dialog_booking_confirmation_title">Booking Confirmation</string>
+    <string name="dialog_booking_confirmation_positive">BOOK</string>
+    <string name="dialog_booking_confirmation_negative">DISCARD</string>
+
 
 </resources>

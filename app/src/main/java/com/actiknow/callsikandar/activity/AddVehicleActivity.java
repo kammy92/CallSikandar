@@ -6,8 +6,11 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,15 +24,34 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.actiknow.callsikandar.R;
-import com.actiknow.callsikandar.fragment.ManageVehicleFragment;
 import com.actiknow.callsikandar.model.Vehicle;
+import com.actiknow.callsikandar.utils.AppConfigTags;
+import com.actiknow.callsikandar.utils.AppConfigURL;
 import com.actiknow.callsikandar.utils.Constants;
+import com.actiknow.callsikandar.utils.NetworkConnection;
 import com.actiknow.callsikandar.utils.TypefaceSpan;
 import com.actiknow.callsikandar.utils.Utils;
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import static com.actiknow.callsikandar.fragment.ManageVehicleFragment.vehicleList;
+import static com.actiknow.callsikandar.utils.Constants.api_key;
 
 public class AddVehicleActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -145,7 +167,7 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
             tvAddVehicle.setVisibility (View.VISIBLE);
             tvUpdateVehicle.setVisibility (View.GONE);
         } else {
-            Vehicle vehicle = ManageVehicleFragment.vehicleList.get (vehicle_id - 1);
+            Vehicle vehicle = vehicleList.get (vehicle_id - 1);
             etCarModel.setText (vehicle.getMake_and_model ());
             etRegistrationNumber.setText (vehicle.getRegistration_number ());
             etYearOfManufacture.setText (vehicle.getYear_of_manufacture ());
@@ -177,7 +199,7 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
                 myCalendar.set (Calendar.YEAR, year);
                 myCalendar.set (Calendar.MONTH, monthOfYear);
                 myCalendar.set (Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "dd/MM/yy"; //In which you need put here
+                String myFormat = "dd/MM/yyyy"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat (myFormat, Locale.US);
                 etLastServiceDate.setText (sdf.format (myCalendar.getTime ()));
             }
@@ -189,6 +211,100 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
                 new DatePickerDialog (AddVehicleActivity.this, date, myCalendar
                         .get (Calendar.YEAR), myCalendar.get (Calendar.MONTH),
                         myCalendar.get (Calendar.DAY_OF_MONTH)).show ();
+            }
+        });
+        tvAddVehicle.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                if (validate ()) {
+                    addNewVehicle (etCarModel.getText ().toString (), etRegistrationNumber.getText ().toString (), Integer.parseInt (etYearOfManufacture.getText ().toString ()), Utils.convertTimeFormat (etLastServiceDate.getText ().toString (), "dd/MM/yyyy", "yyyy-MM-dd"), Integer.parseInt (etKmReading.getText ().toString ()), "Petrol");
+                }
+            }
+        });
+
+        etCarModel.addTextChangedListener (new TextWatcher () {
+            @Override
+            public void onTextChanged (CharSequence s, int start, int before, int count) {
+                if (s.length () > 0) {
+                    input_layout_car_model.setError (null);
+                    input_layout_car_model.setErrorEnabled (false);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged (Editable s) {
+            }
+        });
+        etRegistrationNumber.addTextChangedListener (new TextWatcher () {
+            @Override
+            public void onTextChanged (CharSequence s, int start, int before, int count) {
+                if (s.length () > 0) {
+                    input_layout_registration_number.setError (null);
+                    input_layout_registration_number.setErrorEnabled (false);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged (Editable s) {
+            }
+        });
+        etYearOfManufacture.addTextChangedListener (new TextWatcher () {
+            @Override
+            public void onTextChanged (CharSequence s, int start, int before, int count) {
+                if (s.length () > 0) {
+                    input_layout_year_of_manufacture.setError (null);
+                    input_layout_year_of_manufacture.setErrorEnabled (false);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged (Editable s) {
+            }
+        });
+        etLastServiceDate.addTextChangedListener (new TextWatcher () {
+            @Override
+            public void onTextChanged (CharSequence s, int start, int before, int count) {
+                if (s.length () > 0) {
+                    input_layout_last_service_date.setError (null);
+                    input_layout_last_service_date.setErrorEnabled (false);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged (Editable s) {
+            }
+        });
+        etKmReading.addTextChangedListener (new TextWatcher () {
+            @Override
+            public void onTextChanged (CharSequence s, int start, int before, int count) {
+                if (s.length () > 0) {
+                    input_layout_km_reading.setError (null);
+                    input_layout_km_reading.setErrorEnabled (false);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged (Editable s) {
             }
         });
     }
@@ -247,5 +363,243 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
         return super.onOptionsItemSelected (item);
     }
 
+    private boolean validate () {
+        boolean validate = true;
+        List<String> error = new ArrayList<> ();
+        error.clear ();
+        if (etCarModel.getText ().toString ().length () == 0) {
+            input_layout_car_model.setError ("Select a car model");
+            input_layout_car_model.setErrorEnabled (true);
+            validate = false;
+        }
+        if (etRegistrationNumber.getText ().toString ().length () == 0) {
+            input_layout_registration_number.setError ("Enter a registration number");
+            input_layout_registration_number.setErrorEnabled (true);
+            validate = false;
+        }
+        if (etYearOfManufacture.getText ().toString ().length () == 0) {
+            input_layout_year_of_manufacture.setError ("Enter year of manufacture");
+            input_layout_year_of_manufacture.setErrorEnabled (true);
+            validate = false;
+        }
+        if (etKmReading.getText ().toString ().length () == 0) {
+            input_layout_km_reading.setError ("Enter km reading");
+            input_layout_km_reading.setErrorEnabled (true);
+            validate = false;
+        }
+        if (etLastServiceDate.getText ().toString ().length () == 0) {
+            input_layout_last_service_date.setError ("Enter last service date");
+            input_layout_last_service_date.setErrorEnabled (true);
+            validate = false;
+        }
+
+
+        if (rgFuelType.getCheckedRadioButtonId () == - 1) {
+            Utils.showToast (AddVehicleActivity.this, "Please select a fuel type");
+            validate = false;
+        }
+
+        return validate;
+
+        /*
+        switch (question.getQuestion_type ()) {
+            case "Radio":
+                if (optionSelected.length () == 0) {
+                    error.add ("Select an option");
+                    validate = false;
+                }
+                if (question.isImage_required () && Utils.bitmapToBase64 (bp1).length () == 0) {
+                    error.add ("Select an image");
+                    validate = false;
+                }
+                if (question.isComment_required () && question.getComment_required_for ().equalsIgnoreCase (optionSelected) && etComments.getText ().toString ().length () == 0) {
+                    error.add ("Enter the value in comment");
+                    validate = false;
+                }
+                if (question.getQuestion_id () == 14 && question.getComment_required_for ().equalsIgnoreCase (optionSelected) && etComments.getText ().toString ().length () < 6) {
+                    error.add ("Enter a valid number (Atleast 6 digit)");
+                    validate = false;
+                }
+//                if (question.getQuestion_id () == 19 && etComments.getText ().toString ().length () == 0) {
+//                    error.add ("Enter AC Make in comments");
+//                    validate = false;
+//                }
+//                if (question.getQuestion_id () == 20 && etComments.getText ().toString ().length () == 0) {
+//                    error.add ("Enter UPS Make and Sr Number in comments");
+//                    validate = false;
+//                }
+
+
+                if (question.isMake_serial_type () && ! question.getMandatory_comment_not_for ().equalsIgnoreCase (optionSelected)) {
+                    if (etMake.getText ().toString ().length () == 0) {
+                        error.add ("Please specify make in comments");
+                        validate = false;
+                    }
+                    if (etSerial.getText ().toString ().length () == 0) {
+                        error.add ("Please specify serial in comments");
+                        validate = false;
+                    }
+
+                }
+
+
+                if (error.size () > 0) {
+                    Utils.showValidationErrorDialog (getActivity (), error);
+                }
+                break;
+            case "Hybrid":
+                if (optionSelected.length () == 0) {
+                    error.add ("Select an option");
+                    validate = false;
+                }
+                if (question.isImage_required () && Utils.bitmapToBase64 (bp1).length () == 0) {
+                    error.add ("Select an image");
+                    validate = false;
+                }
+                if (question.isComment_required () && question.getComment_required_for ().equalsIgnoreCase (optionSelected) && etComments.getText ().toString ().length () == 0) {
+                    error.add ("Enter the value in comment");
+                    validate = false;
+                }
+                if (optionSelected.equalsIgnoreCase (question.getExtra_option_required_for ()) && extraOptions.size () == 0) {
+                    error.add ("Select atleast one value");
+                    validate = false;
+                }
+                if (error.size () > 0) {
+                    Utils.showValidationErrorDialog (getActivity (), error);
+                }
+                break;
+            case "Blank":
+                if (question.isComment_required () && question.getComment_required_for ().equalsIgnoreCase (optionSelected) && etComments.getText ().toString ().length () == 0) {
+                    error.add ("Enter the value in comment");
+                    validate = false;
+                }
+                if (question.isImage_required () && Utils.bitmapToBase64 (bp1).length () == 0) {
+                    error.add ("Select an image");
+                    validate = false;
+                }
+                if (error.size () > 0) {
+                    Utils.showValidationErrorDialog (getActivity (), error);
+                }
+                break;
+            case "Rating":
+                if (question.isComment_required () && question.getComment_required_for ().equalsIgnoreCase (optionSelected) && etComments.getText ().toString ().length () == 0) {
+                    error.add ("Enter the value in comment");
+                    validate = false;
+                }
+                if (question.isImage_required () && Utils.bitmapToBase64 (bp1).length () == 0) {
+                    error.add ("Select an Image");
+                    validate = false;
+                }
+                if (error.size () > 0) {
+                    Utils.showValidationErrorDialog (getActivity (), error);
+                }
+                break;
+        }
+
+        */
+//        return validate;
+    }
+
+    private void addNewVehicle (final String make_and_model, final String registration_number, final int year_of_manufacture, final String last_service_date, final int km_reading, final String fuel_type) {
+        if (NetworkConnection.isNetworkAvailable (AddVehicleActivity.this)) {
+            Utils.showLog (Log.INFO, AppConfigTags.URL, AppConfigURL.URL_ADDNEWVEHICLE, true);
+            StringRequest strRequest = new StringRequest (Request.Method.POST, AppConfigURL.URL_ADDNEWVEHICLE,
+                    new Response.Listener<String> () {
+                        @Override
+                        public void onResponse (String response) {
+                            Utils.showLog (Log.INFO, AppConfigTags.SERVER_RESPONSE, response, true);
+                            if (response != null) {
+                                try {
+                                    JSONObject jsonObj = new JSONObject (response);
+                                    boolean is_error = jsonObj.getBoolean (AppConfigTags.ERROR);
+                                    String message = jsonObj.getString (AppConfigTags.MESSAGE);
+                                    int status = jsonObj.getInt (AppConfigTags.STATUS);
+
+                                    switch (status) {
+                                        case 0:
+                                            Utils.showToast (AddVehicleActivity.this, "Vehicle already exist in the list");
+                                            finish ();
+                                            break;
+                                        case 1:
+                                            Utils.showToast (AddVehicleActivity.this, "Vehicle added successfully");
+                                            finish ();
+                                            break;
+//                                        case 2:
+//                                            Utils.showToast (AddVehicleActivity.this, "Vehicle added successfully");
+//                                            finish ();
+//                                            break;
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace ();
+                                }
+                            } else {
+                                Utils.showLog (Log.WARN, AppConfigTags.SERVER_RESPONSE, AppConfigTags.DIDNT_RECEIVE_ANY_DATA_FROM_SERVER, true);
+                            }
+                        }
+                    },
+                    new Response.ErrorListener () {
+                        @Override
+                        public void onErrorResponse (VolleyError error) {
+                            Utils.showLog (Log.ERROR, AppConfigTags.VOLLEY_ERROR, error.toString (), true);
+                            NetworkResponse response = error.networkResponse;
+                            if (response != null && response.data != null) {
+                                Utils.showLog (Log.ERROR, AppConfigTags.ERROR, new String (response.data), true);
+
+                                /*
+                                try {
+                                    JSONObject jsonObj = new JSONObject (new String (response.data));
+                                    boolean is_error = jsonObj.getBoolean (AppConfigTags.ERROR);
+                                    String message = jsonObj.getString (AppConfigTags.MESSAGE);
+                                    Utils.showLog (Log.ERROR, AppConfigTags.ERROR, "" + is_error, true);
+                                    Utils.showLog (Log.ERROR, AppConfigTags.MESSAGE, message, true);
+                                } catch (JSONException e) {
+                                    e.printStackTrace ();
+                                }
+*/
+                            }
+                        }
+                    }) {
+
+                @Override
+                protected Map<String, String> getParams () throws AuthFailureError {
+                    Map<String, String> params = new Hashtable<String, String> ();
+                    params.put (AppConfigTags.MAKE_AND_MODEL, make_and_model);
+                    params.put (AppConfigTags.REGISTRATION_NUMBER, registration_number);
+                    params.put (AppConfigTags.YEAR_OF_MANUFACTURE, String.valueOf (year_of_manufacture));
+                    params.put (AppConfigTags.LAST_SERVICE_DATE, last_service_date);
+                    params.put (AppConfigTags.KM_READING, String.valueOf (km_reading));
+                    params.put (AppConfigTags.FUEL_TYPE, fuel_type);
+
+                    Utils.showLog (Log.INFO, AppConfigTags.PARAMETERS_SENT_TO_THE_SERVER, "" + params, true);
+                    return params;
+                }
+
+                @Override
+                public Map<String, String> getHeaders () throws AuthFailureError {
+                    Map<String, String> params = new HashMap<> ();
+                    params.put ("api_key", api_key);
+                    params.put ("user_login_key", Constants.user_login_key);
+                    Utils.showLog (Log.INFO, AppConfigTags.HEADERS_SENT_TO_THE_SERVER, "" + params, false);
+                    return params;
+                }
+
+
+            };
+            Utils.sendRequest (strRequest, 30);
+        } else {
+        }
+//        vehicleList.clear ();
+//        final Handler handler = new Handler ();
+//        handler.postDelayed (new Runnable () {
+//            @Override
+//            public void run () {
+//                Vehicle vehicle1 = new Vehicle (1, "Volkswagen Polo", "DL 6SM 1234", "2010", "14000", "12/02/2016", "Petrol");
+//                vehicleList.add (vehicle1);
+//                adapter.notifyDataSetChanged ();
+//                swipeRefreshLayout.setRefreshing (false);
+//            }
+//        }, 1000);
+    }
 }
 

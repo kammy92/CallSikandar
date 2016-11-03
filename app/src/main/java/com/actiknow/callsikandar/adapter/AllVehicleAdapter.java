@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actiknow.callsikandar.R;
 import com.actiknow.callsikandar.activity.AddVehicleActivity;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class AllVehicleAdapter extends RecyclerView.Adapter<AllVehicleAdapter.ViewHolder> {
     OnItemClickListener mItemClickListener;
+    OnItemLongClickListener mItemLongClickListener;
     private Activity activity;
     private List<Vehicle> vehicleList = new ArrayList<Vehicle> ();
 
@@ -59,11 +61,20 @@ public class AllVehicleAdapter extends RecyclerView.Adapter<AllVehicleAdapter.Vi
         this.mItemClickListener = mItemClickListener;
     }
 
+    public void SetOnItemLongClickListener (final OnItemLongClickListener mItemLongClickListener) {
+        this.mItemLongClickListener = mItemLongClickListener;
+    }
+
     public interface OnItemClickListener {
         public void onItemClick (View view, int position);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public interface OnItemLongClickListener {
+        public void onItemLongClick (View view, int position);
+    }
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView make_and_model;
         TextView registration_number;
         TextView km_reading;
@@ -96,6 +107,15 @@ public class AllVehicleAdapter extends RecyclerView.Adapter<AllVehicleAdapter.Vi
             intent.putExtra ("vehicle_id", vehicle.getId ());
             activity.startActivity (intent);
             activity.overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+        }
+
+
+        @Override
+        public boolean onLongClick (View v) {
+
+            Toast.makeText (activity, "Hello", Toast.LENGTH_LONG).show ();
+
+            return false;
         }
     }
 }

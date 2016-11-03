@@ -101,6 +101,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/registration_number"
+                        android:inputType="textCapCharacters"
                         android:padding="@dimen/edittext_padding"
                         android:textSize="@dimen/text_size_medium"/>
                 </android.support.design.widget.TextInputLayout>
@@ -118,6 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/mf_year"
+                        android:inputType="number"
                         android:padding="@dimen/edittext_padding"
                         android:textSize="@dimen/text_size_medium"/>
                 </android.support.design.widget.TextInputLayout>
