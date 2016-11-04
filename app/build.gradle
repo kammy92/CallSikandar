@@ -42,6 +42,4 @@ dependencies {
     compile 'com.wang.avi:library:1.0.5'
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'com.squareup.picasso:picasso:2.5.2'
-
-
 }
