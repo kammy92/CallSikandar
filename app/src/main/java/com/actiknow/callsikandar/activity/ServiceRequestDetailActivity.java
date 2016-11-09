@@ -1,5 +1,9 @@
 package com.actiknow.callsikandar.activity;
 
+/**
+ * Created by actiknow on 11/7/16.
+ */
+
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -12,34 +16,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.actiknow.callsikandar.R;
-import com.actiknow.callsikandar.adapter.ServiceProviderDetailPagerAdapter;
+import com.actiknow.callsikandar.adapter.ServiceRequestDetailPagerAdapter;
 import com.actiknow.callsikandar.utils.Constants;
 import com.actiknow.callsikandar.utils.TypefaceSpan;
 import com.actiknow.callsikandar.utils.Utils;
 
-/**
- * Created by l on 27/10/2016.
- */
 
-public class ServiceProviderDetailActivity extends AppCompatActivity {
-    Toolbar toolbar;
-    int service_provider_id = 0;
-    String service_provider_name = "";
+public class ServiceRequestDetailActivity extends AppCompatActivity {
+
 
     ViewPager viewPager;
     TabLayout tabLayout;
 
+
+    Toolbar toolbar;
+
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
-        setContentView (R.layout.activity_service_provider_detail);
-
+        setContentView (R.layout.activity_service_request_detail);
         initView ();
-        getExtras ();
         initData ();
-//        initListener ();
         setUpNavigationDrawer ();
 
+    }
+
+    private void initData () {
+        viewPager.setAdapter (new ServiceRequestDetailPagerAdapter (getSupportFragmentManager (), ServiceRequestDetailActivity.this, 1));
+        tabLayout.setupWithViewPager (viewPager);
+        Utils.setTypefaceToAllViews (ServiceRequestDetailActivity.this, tabLayout);
     }
 
     private void initView () {
@@ -47,16 +53,10 @@ public class ServiceProviderDetailActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById (R.id.sliding_tabs);
     }
 
-    private void initData () {
-        viewPager.setAdapter (new ServiceProviderDetailPagerAdapter (getSupportFragmentManager (), ServiceProviderDetailActivity.this, service_provider_id));
-        tabLayout.setupWithViewPager (viewPager);
-        Utils.setTypefaceToAllViews (ServiceProviderDetailActivity.this, tabLayout);
-    }
-
     private void getExtras () {
         Bundle bundle = getIntent ().getExtras ();
-        service_provider_name = bundle.getString ("service_provider_name", "");
-        service_provider_id = bundle.getInt ("service_provider_id", 0);
+//        service_provider_name = bundle.getString ("service_provider_name", "");
+//        service_provider_id = bundle.getInt ("service_provider_id", 0);
     }
 
     private void initListener () {
@@ -66,8 +66,8 @@ public class ServiceProviderDetailActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById (R.id.toolbar1);
         toolbar.showOverflowMenu ();
         SpannableString s;
-        s = new SpannableString (service_provider_name);
-        s.setSpan (new TypefaceSpan (ServiceProviderDetailActivity.this, Constants.font_name), 0, s.length (), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        s = new SpannableString ("Request #57656");
+        s.setSpan (new TypefaceSpan (ServiceRequestDetailActivity.this, Constants.font_name), 0, s.length (), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         setSupportActionBar (toolbar);
         ActionBar actionBar = getSupportActionBar ();
         try {
@@ -100,7 +100,7 @@ public class ServiceProviderDetailActivity extends AppCompatActivity {
                 overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
                 break;
         }
-        Utils.hideSoftKeyboard (ServiceProviderDetailActivity.this);
+        Utils.hideSoftKeyboard (ServiceRequestDetailActivity.this);
         return super.onOptionsItemSelected (item);
     }
 

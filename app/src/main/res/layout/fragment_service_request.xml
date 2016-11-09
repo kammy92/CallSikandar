@@ -7,10 +7,12 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     tools:context="com.actiknow.callsikandar.activity.HomeActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true">
+
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBar"
             android:layout_width="match_parent"
@@ -19,6 +21,7 @@
             android:theme="@style/AppTheme.AppBarOverlay"
             android:visibility="gone"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar1"
                 style="@style/Widget.MyApp.ActionBar"
@@ -29,6 +32,7 @@
                 android:background="@color/primary"
                 android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
                 app:layout_collapseMode="parallax">
+
                 <RelativeLayout
                     android:id="@+id/toolbar_logo"
                     android:layout_width="wrap_content"
@@ -45,6 +49,7 @@
                     -->
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
+
             <android.support.design.widget.CoordinatorLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -56,24 +61,28 @@
 
             </android.support.design.widget.CoordinatorLayout>
         </android.support.design.widget.AppBarLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:animateLayoutChanges="true">
-            <TextView
-                android:id="@+id/tsdfsdfvcs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvCreateAccount"
-                android:layout_marginLeft="@dimen/activity_margin"
-                android:layout_marginRight="@dimen/activity_margin"
-                android:gravity="center"
-                android:padding="@dimen/activity_margin"
-                android:text="History fragment"
-                android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_large"
-                android:textStyle="bold"/>
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvServiceRequestList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:fillViewport="true"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:scrollbarStyle="insideOverlay"/>
+            </android.support.v4.widget.SwipeRefreshLayout>
+
         </RelativeLayout>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

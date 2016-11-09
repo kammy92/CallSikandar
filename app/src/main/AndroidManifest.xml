@@ -2,6 +2,16 @@
 <manifest package="com.actiknow.callsikandar"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <uses-permission android:name="com.actiknow.callsikandar.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+
     <application
         android:name="com.actiknow.callsikandar.app.AppController"
         android:allowBackup="true"
@@ -62,6 +72,27 @@
             android:name=".activity.ServiceProviderDetailActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".activity.SupportActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.SupportPageActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.ServiceRequestDetailActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA4YwPu5AuB_bnbjiZXwGaRyXOoipXgK6Q"/>
+
+
     </application>
 
 </manifest>

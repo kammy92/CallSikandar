@@ -8,7 +8,8 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@color/app_background_grey"
-    tools:context="com.actiknow.callsikandar.activity.ServiceDetailActivity">
+    tools:context="com.actiknow.callsikandar.activity.SupportActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +20,7 @@
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
             android:theme="@style/AppTheme.AppBarOverlay"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar1"
@@ -58,25 +59,19 @@
 
             </android.support.design.widget.CoordinatorLayout>
         </android.support.design.widget.AppBarLayout>
+
         <RelativeLayout
+            android:id="@+id/activity_main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_height="match_parent"
             android:layout_below="@+id/appBar"
-            android:animateLayoutChanges="true">
+            android:padding="@dimen/activity_margin">
 
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_refresh_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <WebView
+                android:id="@+id/wvTermOfUse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rvPackageList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fillViewport="true"
-                    android:scrollbarStyle="insideOverlay"/>
-            </android.support.v4.widget.SwipeRefreshLayout>
         </RelativeLayout>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -3,6 +3,7 @@ package com.actiknow.callsikandar.utils;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -12,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -37,6 +39,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -369,5 +373,59 @@ public class Utils {
         ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo ();
         activityManager.getMemoryInfo (memoryInfo);
         return memoryInfo;
+    }
+
+    public static String md5 (String s) {
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = MessageDigest.getInstance ("MD5");
+            digest.update (s.getBytes ());
+            byte messageDigest[] = digest.digest ();
+
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer ();
+            for (int i = 0; i < messageDigest.length; i++)
+                hexString.append (Integer.toHexString (0xFF & messageDigest[i]));
+            return hexString.toString ();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace ();
+        }
+        return "";
+    }
+
+    public static float dpFromPx (Context context, float px) {
+        return px / context.getResources ().getDisplayMetrics ().density;
+    }
+
+    public static float pxFromDp (Context context, float dp) {
+        return dp * context.getResources ().getDisplayMetrics ().density;
+    }
+
+    public static boolean dial (Context c) {
+        final Intent i = new Intent (Intent.ACTION_DIAL);
+        i.setData (Uri.parse ("tel:" + "9873684678"));//+ c.getString (R.string.intent_number)));
+//        final Intent icc = Intent.createChooser (i, c.getString (R.string.intent_call));
+        try {
+//            c.startActivity (icc);
+            return true;
+        } catch (ActivityNotFoundException e) {
+            return false;
+        }
+    }
+
+    public static boolean sendMail (Context c) {
+        final String mail = "karman.singhh@gmail.com";//c.getString (R.string.intent_mail);
+        final Uri u = Uri.fromParts ("mailto", mail, null);
+        final Intent i = new Intent (Intent.ACTION_SENDTO, u);
+
+//        final Intent icc = Intent.createChooser (i, c.getString (R.string.intent_mail_tit));
+
+        try {
+//            c.startActivity (icc);
+            return true;
+        } catch (ActivityNotFoundException e) {
+            return false;
+        }
     }
 }

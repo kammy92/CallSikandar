@@ -1,8 +1,8 @@
 package com.actiknow.callsikandar.activity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,64 +10,51 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.actiknow.callsikandar.R;
-import com.actiknow.callsikandar.adapter.ServiceProviderDetailPagerAdapter;
+import com.actiknow.callsikandar.fragment.Support_1_Fragment;
 import com.actiknow.callsikandar.utils.Constants;
 import com.actiknow.callsikandar.utils.TypefaceSpan;
 import com.actiknow.callsikandar.utils.Utils;
 
-/**
- * Created by l on 27/10/2016.
- */
-
-public class ServiceProviderDetailActivity extends AppCompatActivity {
+public class SupportActivity extends AppCompatActivity {
+    TextView tvContactUs;
     Toolbar toolbar;
-    int service_provider_id = 0;
-    String service_provider_name = "";
-
-    ViewPager viewPager;
-    TabLayout tabLayout;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
-        setContentView (R.layout.activity_service_provider_detail);
-
+        setContentView (R.layout.activity_support);
         initView ();
-        getExtras ();
         initData ();
-//        initListener ();
+        initListener ();
+        initAdapter ();
         setUpNavigationDrawer ();
-
     }
 
     private void initView () {
-        viewPager = (ViewPager) findViewById (R.id.viewpager);
-        tabLayout = (TabLayout) findViewById (R.id.sliding_tabs);
     }
 
     private void initData () {
-        viewPager.setAdapter (new ServiceProviderDetailPagerAdapter (getSupportFragmentManager (), ServiceProviderDetailActivity.this, service_provider_id));
-        tabLayout.setupWithViewPager (viewPager);
-        Utils.setTypefaceToAllViews (ServiceProviderDetailActivity.this, tabLayout);
-    }
-
-    private void getExtras () {
-        Bundle bundle = getIntent ().getExtras ();
-        service_provider_name = bundle.getString ("service_provider_name", "");
-        service_provider_id = bundle.getInt ("service_provider_id", 0);
+        FragmentManager fragmentManager = getFragmentManager ();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction ();
+        Support_1_Fragment f1 = new Support_1_Fragment ();
+        fragmentTransaction.add (R.id.fragment_container, f1, "Fragment_Support");
+        fragmentTransaction.commit ();
     }
 
     private void initListener () {
     }
 
+    private void initAdapter () {
+    }
+
     private void setUpNavigationDrawer () {
         toolbar = (Toolbar) findViewById (R.id.toolbar1);
         toolbar.showOverflowMenu ();
-        SpannableString s;
-        s = new SpannableString (service_provider_name);
-        s.setSpan (new TypefaceSpan (ServiceProviderDetailActivity.this, Constants.font_name), 0, s.length (), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        SpannableString s = new SpannableString ("Support");
+        s.setSpan (new TypefaceSpan (SupportActivity.this, Constants.font_name), 0, s.length (), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         setSupportActionBar (toolbar);
         ActionBar actionBar = getSupportActionBar ();
         try {
@@ -80,11 +67,6 @@ public class ServiceProviderDetailActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed () {
-        finish ();
-        overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
-    }
 
     @Override
     public boolean onCreateOptionsMenu (Menu menu) {
@@ -100,8 +82,13 @@ public class ServiceProviderDetailActivity extends AppCompatActivity {
                 overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
                 break;
         }
-        Utils.hideSoftKeyboard (ServiceProviderDetailActivity.this);
+        Utils.hideSoftKeyboard (SupportActivity.this);
         return super.onOptionsItemSelected (item);
     }
 
+    @Override
+    public void onBackPressed () {
+        finish ();
+        overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
+    }
 }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Rahul jain"
+        android:textColor="@color/md_black_1000"
+        android:textSize="14sp"/>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@style/customRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserName"
+        android:layout_margin="10dp"
+        android:max="5"
+        android:numStars="5"
+        android:rating="5.0"
+        android:stepSize="0.1"/>
+
+    <TextView
+        android:id="@+id/tvRatingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserName"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/ratingBar"
+        android:text="03:43 PM,"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tvRatingDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserName"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/tvRatingTime"
+        android:text=" 01 October 2016"
+        android:textSize="12sp"/>
+
+
+    <TextView
+        android:id="@+id/tvRatingDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingBar"
+        android:layout_marginLeft="10dp"
+        android:text="Description"
+        android:textSize="12sp"/>
+
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tvRatingDescription"
+        android:layout_marginTop="3dp"
+        android:background="@color/accent"/>
+
+
+</RelativeLayout>

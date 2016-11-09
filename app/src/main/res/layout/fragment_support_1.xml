@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@color/app_background_grey"
-    tools:context="com.actiknow.callsikandar.activity.ServiceDetailActivity">
+    tools:context="com.actiknow.callsikandar.activity.SupportActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,23 +60,12 @@
         </android.support.design.widget.AppBarLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/appBar"
-            android:animateLayoutChanges="true">
-
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_refresh_layout"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appBar">
+            <ListView
+                android:id="@+id/lvSupportList"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rvPackageList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fillViewport="true"
-                    android:scrollbarStyle="insideOverlay"/>
-            </android.support.v4.widget.SwipeRefreshLayout>
+                android:layout_height="wrap_content"/>
         </RelativeLayout>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

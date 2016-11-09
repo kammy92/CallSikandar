@@ -254,6 +254,7 @@ public class MainActivity extends AppCompatActivity {
                                 fragment = new ManageVehicleFragment ();
                                 break;
                             case 7:
+                                s = new SpannableString (getResources ().getString (R.string.app_name));
                                 final Handler handler = new Handler ();
                                 handler.postDelayed (new Runnable () {
                                     @Override
@@ -265,8 +266,20 @@ public class MainActivity extends AppCompatActivity {
                                 }, 150);
                                 break;
                             case 8:
+                                s = new SpannableString (getResources ().getString (R.string.app_name));
+                                final Handler handler2 = new Handler ();
+                                handler2.postDelayed (new Runnable () {
+                                    @Override
+                                    public void run () {
+                                        Intent intent = new Intent (MainActivity.this, SupportActivity.class);
+                                        startActivity (intent);
+                                        overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+                                    }
+                                }, 150);
+
                                 break;
                             case 9:
+                                s = new SpannableString (getResources ().getString (R.string.app_name));
                                 showLogOutDialog ();
                                 break;
                         }
@@ -579,5 +592,18 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected (item);
     }
 
+    @Override
+    public void onResume () {
+        super.onResume ();
+//        result.setSelection (0);
+//        fabHomeMenu.setVisibility (View.VISIBLE);
 
+//        fragment = new HomeFragment ();
+//        if (fragment != null) {
+//            FragmentManager fragmentManager = getSupportFragmentManager ();
+//            fragmentManager.beginTransaction ().replace (R.id.main_content, fragment).commit ();
+//        }
+
+
+    }
 }
