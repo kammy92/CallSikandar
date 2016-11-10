@@ -103,5 +103,4 @@ public class ServiceProviderDetailActivity extends AppCompatActivity {
         Utils.hideSoftKeyboard (ServiceProviderDetailActivity.this);
         return super.onOptionsItemSelected (item);
     }
-
 }

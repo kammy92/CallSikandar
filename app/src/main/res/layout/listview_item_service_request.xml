@@ -1,91 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:card_view="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="#FFE4E6E5"
-              android:orientation="horizontal"
-              android:padding="8dp">
+<android.support.v7.widget.CardView
+    android:id="@+id/card_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/activity_margin"
+    android:clickable="true"
+    android:elevation="5dp"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="10dp">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="6dp"
-        card_view:cardElevation="0dp"
-        card_view:cardPreventCornerOverlap="false">
-
+        android:layout_margin="@dimen/activity_margin"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivRepairProviderIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/ivRepairProviderIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_launcher"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="5dp">
-
-                        <TextView
-                            android:id="@+id/tvRepairsName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_weight="1"
-                            android:text="Repairs"
-                            android:textColor="#FF0B9313"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Request #"/>
-
-                        <TextView
-                            android:id="@+id/tvRequestId"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="57338298"/>
-
-                    </LinearLayout>
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tvServiceRequest"
+                        android:id="@+id/tvRepairsName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="Service Requested"/>
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:layout_weight="1"
+                        android:paddingBottom="3dp"
+                        android:paddingRight="3dp"
+                        android:paddingTop="3dp"
 
+                        android:text="Repairs"
+                        android:textColor="#FF0B9313"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Request #"/>
+
+                    <TextView
+                        android:id="@+id/tvRequestId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="57338298"/>
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvServiceRequest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:paddingBottom="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingTop="3dp"
+                    android:text="Service Requested"/>
+
+
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/accent"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="WAITING FOR QUOTATIONS"
-                android:textColor="#FF0B9313"/>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/accent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WAITING FOR QUOTATIONS"
+            android:textColor="#FF0B9313"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

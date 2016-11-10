@@ -66,7 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:animateLayoutChanges="true">
+            android:animateLayoutChanges="true"
+            android:background="@color/app_background_grey">
 
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/swipe_refresh_layout"
@@ -78,8 +79,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentBottom="true"
+                    android:clipToPadding="false"
                     android:fillViewport="true"
-                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:paddingBottom="@dimen/activity_margin"
+                    android:paddingLeft="@dimen/activity_margin"
+                    android:paddingRight="@dimen/activity_margin"
                     android:scrollbarStyle="insideOverlay"/>
             </android.support.v4.widget.SwipeRefreshLayout>
 
