@@ -55,6 +55,8 @@ import static com.actiknow.callsikandar.utils.Constants.api_key;
 
 public class AddVehicleActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    // old project
+
     AutoCompleteTextView etCarModel;
     EditText etRegistrationNumber;
     EditText etYearOfManufacture;
